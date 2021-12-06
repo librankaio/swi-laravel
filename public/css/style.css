@@ -1,0 +1,200 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+.header{
+    position: fixed;
+    background: #22242A;
+    padding: 20;
+    width: 100%;
+    height: 30px;
+}
+
+.left-area h3{
+    color: #fff;
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.sidebar{
+    background-color: #00235D;
+    position: fixed;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    transition: 0.5s;
+    transition-property: left;
+}
+
+.sidebar .profile_form{
+    background-color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    transition: 0.5s;
+    transition-property: left;
+}
+
+#check:checked ~ .sidebar .profile_form{
+    background-color: #00235D;
+    display: none;
+}
+
+.sidebar .profile_form .profile_img{
+    width: 100px ;
+    height: 100px;
+    border-radius:100px;
+    margin-bottom: 10px;
+    border: 4px solid #00235D;
+}
+
+.sidebar h4{
+    color: #00235D;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.sidebar a{
+    color: #ffffff;
+    display: block;
+    width: 100%;
+    line-height: 55px;
+    text-decoration: none;
+    padding-left: 40px;
+    box-sizing: border-box;
+}
+
+/* .sidebar a:hover{
+    background-color: #003480;
+} */
+
+.sidebar .btn_NavActive, .btn_Nav:hover{
+    border-left: 10px solid #E22785;
+    width: 100%;
+    border-radius: 1px;
+    background-color: #003480;
+}
+
+#check:checked ~.sidebar .btn_NavActive, .btn_Nav:hover{
+    border-left: none;
+    border-right: 6px solid #E22785;
+    border-radius: 1px;
+    background-color: #003480;
+}
+
+.sidebar i{
+    padding-right: 10px;
+}
+
+label #sidebar_toggle{
+    /* z-index: 1; */
+    color: #003480;
+    position: fixed;
+    cursor: pointer;
+    left: 200px;
+    font-size: 25px;
+    /* margin: 5px 0; */
+    transition: 0.5s;
+    transition-property:left;
+}
+
+label #sidebar_toggle:hover{
+    color: #E22785;
+}
+
+#check:checked ~ .sidebar{
+    left: -190px;
+}
+
+#check:checked ~ .sidebar .head-sidebar label #sidebar_toggle{
+    margin: center;
+    left: 20px;
+}
+
+.sidebar .head-sidebar{
+    padding-bottom: 30px;
+    background-color:#ffff ;
+}
+
+#check:checked ~ .sidebar a span {
+    display: none;
+}
+
+#check:checked ~ .sidebar a{
+    font-size: 20px;
+    margin-left: 170px;
+    width: 80px;
+}
+
+.content{
+    margin-left:  250px;
+    /* background: url(../img/backgrnd-swiapps.png) no-repeat; */
+    background-color: #C4C4C4;
+    background-position: center;
+    background-size: cover;
+    /* height: 100%; */
+    height: 150vh;
+    transition: 0.5s;
+}
+
+#check:checked ~ .content{
+    margin-left:  60px;
+}
+
+#check{
+    display: none;
+}
+
+.sidebar .head-sidebar  .logo-btn{
+    /* position: relative;
+    cursor: pointer; */
+    /* top: 0px; */
+    color:#003480;
+    padding-left: 0px;
+    background-color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#check:checked ~ .sidebar .head-sidebar  .logo-btn span{
+    display: none;
+}
+
+.logo-btn .logo{
+    width: 80px ;
+    height: 80px;
+    /* position: fixed; */
+    /* cursor: pointer; */
+    /* top: 0px;
+    left: 50px; */
+}
+
+#check:checked ~ .logo-btn .logo{
+    width: 60px;
+    height: 60px;
+    left: 50px;
+    background-color: #22242A;
+}
+
+.content .content_Nav{
+    background-color: #fff;
+    height: 60px;
+}
+
+.bg-img {
+    /* The image used */
+    background-image: url("https://static.vecteezy.com/system/resources/previews/002/814/299/non_2x/geometric-shapes-of-dark-blue-colors-in-memphis-design-style-vector.jpg");
+  
+    /* Control the height of the image */
+    min-height: 380px;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
