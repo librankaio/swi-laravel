@@ -28,9 +28,9 @@
                             <label class="form-label" for="username">Username</label>
                             <input type="text" id="username" class="form-control form-control-lg" placeholder="Username" name="username" required="required" id="username" value="{{ old('username') }}" autofocus>
                             </div>
-                            @if ($errors->has('username'))
+                            {{-- @if ($errors->has('username'))
                                 <span class="text-danger text-left">{{ $errors->first('username') }}</span>
-                            @endif
+                            @endif --}}
                         <div class="form-outline mb-3 text-start">
                         <label class="form-label" for="email">Email</label>
                         <input type="text" id="email" class="form-control form-control-lg" placeholder="Email" name="email" required="required" id="email" value="{{ old('email') }}" autofocus/>

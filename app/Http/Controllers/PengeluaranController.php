@@ -16,15 +16,7 @@ class PengeluaranController extends Controller
 {
     //
     public function index(){
-        // $data_pengeluaran = Pengeluaran::paginate(1);
-        // return view('pengeluaran', [
-        //     'data_pengeluaran' => $data_pengeluaran]);
-        // $data_cmb = DB::table('pengeluaran_dokumen')->select('jenis_dokumen')->where('tstatus','=',1)->get();
-        // $data_cmb = Pengeluaran::select('jenis_dokumen')->where('tstatus','=',1)->get()->toArray();
-        // return view('pengeluaran',compact('data_cmb'));
-        return view('pengeluaran');
-        // return view('pengeluaran', [
-        //     'data_cmb' => $data_cmb]);
+        return view('reports.pengeluaran');
     }
 
     // public function getPengeluaran(){
@@ -41,40 +33,56 @@ class PengeluaranController extends Controller
 
     public function searchPengeluaran(Request $request){
         
-        if(isset($request->jenisdok,$request->dtfrom,$request->dtto)){
-            // dd($request->all());
-            if($request->input('jenisdok') =='All'){
+        if ($request->searchtext == null ){
+            if($request->jenisdok != "All"){
                 $dtfr = $request->input('dtfrom');
                 $dtto = $request->input('dtto');
                 $jenisdok = $request->input('jenisdok');
-                // dd($dtfr,$dtto);
-                $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
-                $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
-                
-                $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->paginate(10);
-
-                $data_cmb = DB::table('pengeluaran_dokumen')->select('jenis_dokumen')->where('tstatus','=',1)->get();
-                // return view('pengeluaran',compact('results','data_cmb'));
-                return view('pengeluaran', [
-                    'results' => $results]);
-            }elseif($request->input('jenisdok') != ''){
-                $dtfr = $request->input('dtfrom');
-                $dtto = $request->input('dtto');
-                $jenisdok = $request->input('jenisdok');
-                // dd($dtfr,$dtto);
                 $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                 $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
                 
                 $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->paginate(10);
-
-                $data_cmb = DB::table('pengeluaran_dokumen')->select('jenis_dokumen')->where('tstatus','=',1)->get();
-                // return view('pengeluaran',compact('results','data_cmb'));
-                return view('pengeluaran', [
-                    'results' => $results]);
+    
+                return view('reports.pengeluaran', [
+                            'results' => $results]);
+            }else if ($request->jenisdok == "All"){
+                $dtfr = $request->input('dtfrom');
+                $dtto = $request->input('dtto');
+                $jenisdok = $request->input('jenisdok');
+                $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+                $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+                
+                $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->paginate(10);
+    
+                return view('reports.pengeluaran', [
+                            'results' => $results]);
             }
-            
-        }else{
-            return view('pengeluaran');
+        }else if ($request->searchtext != null ){
+            if($request->jenisdok != "All"){
+                $searchtext = $request->searchtext;
+                $dtfr = $request->input('dtfrom');
+                $dtto = $request->input('dtto');
+                $jenisdok = $request->input('jenisdok');
+                $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+                $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+                
+                $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->where('dpnomor','=',$searchtext)->paginate(10);
+    
+                return view('reports.pengeluaran', [
+                            'results' => $results]);
+            }else if ($request->jenisdok == "All"){
+                $searchtext = $request->searchtext;
+                $dtfr = $request->input('dtfrom');
+                $dtto = $request->input('dtto');
+                $jenisdok = $request->input('jenisdok');
+                $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+                $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+                
+                $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('dpnomor','=',$searchtext)->paginate(10);
+    
+                return view('reports.pengeluaran', [
+                            'results' => $results]);
+            }
         }
     }
 

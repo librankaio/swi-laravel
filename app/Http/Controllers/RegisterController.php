@@ -19,7 +19,7 @@ class RegisterController extends Controller
             'username' => ['required', 'string', 'min:3', 'alpha_num', 'max:25'],
             'email' => ['required', 'email'],
             'password' => ['required', 'min:8'],
-            'confpass' => ['min:8'],
+            'confpassword' => ['min:8'],
         ]);
 
         User::create([
