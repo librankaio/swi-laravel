@@ -2,9 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MutasiBhnBakuController;
+use App\Http\Controllers\MutasiBrgJadiController;
+use App\Http\Controllers\MutasiLogHistController;
+use App\Http\Controllers\MutasiMesinController;
+use App\Http\Controllers\MutasiScrapController;
+use App\Http\Controllers\MutasiWinProcessController;
 use App\Http\Controllers\PemasukkanController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PengeluaranController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,58 +25,55 @@ use App\Http\Controllers\PengeluaranController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('login');
-// });
+// Route::get('register', [RegisterController::class, 'create'])->name('register');
 
-// route::get('/',[LoginController::class,'index']);
+// Route::post('register', [RegisterController::class, 'store'])->name('register');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// });
 
-// Route::get('/register', function () {
-//     return view('register');
-// });
 
-// Route::get('/pengeluaran', function () {
-//     return view('pengeluaran');
-// });
-
-// Route::get('{data_pengeluaran}', [PengeluaranController::class, 'index']);
-
-// Route::group(['namespace' => 'App\Http\Controllers'],function(){
-//     Route::get('/','LoginController@show')->name('login');
-
-//     Route::group(['middleware' =>['guest']],function(){
-            
-//         Route::get('/register', 'RegisterController@show')->name('register.show');
-//         Route::post('/register', 'RegisterController@register')->name('register.perform');
-
-//         Route::get('/login', 'LoginController@show')->name('login.show');
-//         Route::post('/login', 'LoginController@login')->name('login.perform');
-
-//     });
-// });
-
-Route::get('register', [RegisterController::class, 'create'])->name('register');
-
-Route::post('register', [RegisterController::class, 'store'])->name('register');
-
-Route::get('/', [LoginController::class, 'create'])->name('login');
-Route::post('/', [LoginController::class, 'postLogin'])->name('register');
+Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::post('/', [LoginController::class, 'postLogin'])->name('postlogin');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+Route::group(['middleware' => 'guest'], function () {
+
+});
 
 
-Route::group(['middleware' => ['auth']], function(){
-    Route::get('/dashboard',[PengeluaranController::class, 'index'])->name('dashboard');
-
-    //Pengeluaran
-    Route::get('pengeluaran', [PengeluaranController::class, 'index'])->name('pengeluaran');
-    Route::get('searchpengeluaran', [PengeluaranController::class, 'searchPengeluaran'])->name('searchpengeluaran');
-    Route::get('exportexcel', [PengeluaranController::class, 'exportExcel'])->name('exportexcel');
+Route::group(['middleware' => ['auth']], function () {
 
     //Pemasukkan
-    Route::get('pemasukan', [PemasukkanController::class, 'index'])->name('pemasukkan');
-    Route::get('searchpemasukkan', [PemasukkanController::class, 'searchPemasukan'])->name('searchpemasukkan');
+    Route::get('pemasukan', [PemasukkanController::class, 'index'])->name('pemasukan');
+    Route::get('exportexcelpemasukan', [PemasukkanController::class, 'exportExcel'])->name('exportexcel');
+    Route::get('exportpdfpemasukan', [PemasukkanController::class, 'exportPdf'])->name('exportpdf');
+    
+    //Pengeluaran
+    Route::get('pengeluaran', [PengeluaranController::class, 'index'])->name('pengeluaran');
+    Route::get('exportexcelpengeluaran', [PengeluaranController::class, 'exportExcel'])->name('exportexcel');
+    Route::get('exportpdfpengeluaran', [PengeluaranController::class, 'exportPdf'])->name('exportpdf');
+    // Route::get('searchp', [PengeluaranController::class, 'searchPengeluaran'])->name('searchpengeluaran');
+    
+    //MutasiBahanBaku
+    Route::get('mutasibhnbaku', [MutasiBhnBakuController::class, 'index'])->name('mutasibhnbaku');
+    Route::get('exportexcelbhnbaku', [MutasiBhnBakuController::class, 'exportExcel'])->name('exportexcel');
+    Route::get('exportpdfbhnbaku', [MutasiBhnBakuController::class, 'exportPdf'])->name('exportpdf');
+    
+    //MutasiBarangJAdi
+    Route::get('mutasibrgjadi', [MutasiBrgJadiController::class, 'index'])->name('mutasibrgjadi');
+    Route::get('exportexcelbrgjadi', [MutasiBrgJadiController::class, 'exportExcel'])->name('exportexcel');
+
+    // MutasiScrap
+    Route::get('mutasiscrap', [MutasiScrapController::class, 'index'])->name('mutasiscrap');
+    Route::get('exportexcelscrap', [MutasiScrapController::class, 'exportExcel'])->name('exportexcel');
+
+    // MutasiMesin
+    Route::get('mutasimesin', [MutasiMesinController::class, 'index'])->name('mutasimesin');
+    Route::get('exportexcelmutasimesin', [MutasiMesinController::class, 'exportExcel'])->name('exportexcel');
+
+    // MutasiWorkInProcess
+    Route::get('mutasiwip', [MutasiWinProcessController::class, 'index'])->name('mutasiwip');
+    Route::get('exportexcelmutasiwip', [MutasiWinProcessController::class, 'exportExcel'])->name('exportexcel');
+
+    // MutasiLogHist
+    Route::get('mutasiloghist', [MutasiLogHistController::class, 'index'])->name('mutasiloghist');
+    Route::get('exportexcelmutasiloghist', [MutasiLogHistController::class, 'exportExcel'])->name('exportexcel');
 });
