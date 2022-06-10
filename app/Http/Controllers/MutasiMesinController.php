@@ -17,7 +17,7 @@ class MutasiMesinController extends Controller
                 $dtto = $request->input('dtto');
                 $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                 $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
-                $compcode = "BYC";
+                $compcode = session()->get('comp_code');
 
                 $results = DB::select('CALL rptmutasimesin (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
 
@@ -59,7 +59,7 @@ class MutasiMesinController extends Controller
         $dtto = $request->input('dtto');
         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
-        $compcode = "BYC";
+        $compcode = session()->get('comp_code');
 
         $results = DB::select('CALL rptmutasimesin (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
 

@@ -12,7 +12,7 @@ class MutasiLogHistController extends Controller
         if(isset($request->dtfrom)){
             $datefrForm = date("Y-m-d",strtotime(str_replace('/', '-',$request->dtfrom)));
             $datetoForm = date("Y-m-d",strtotime(str_replace('/', '-',$request->dtto)));
-            $comp_code = "BYC";
+            $comp_code = session()->get('comp_code');
             
             // $results = DB::table('userlog')->whereBetween('datein', [$datefrForm, $datetoForm])->where('comp_code', '=', $comp_code)->get();
             $results = DB::select("SELECT * FROM userlog WHERE comp_code = '$comp_code' and DATE(datein) >= '".$datefrForm."' and DATE(datein) <= '".$datetoForm."'");
@@ -29,7 +29,7 @@ class MutasiLogHistController extends Controller
     {
         $datefrForm = date("Y-m-d",strtotime(str_replace('/', '-',$request->dtfrom)));
         $datetoForm = date("Y-m-d",strtotime(str_replace('/', '-',$request->dtto)));
-        $comp_code = "BYC";
+        $comp_code = session()->get('comp_code');
 
         $results = DB::select("SELECT * FROM userlog WHERE comp_code = '$comp_code' and DATE(datein) >= '".$datefrForm."' and DATE(datein) <= '".$datetoForm."'");
         

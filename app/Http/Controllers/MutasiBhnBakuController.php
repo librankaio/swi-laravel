@@ -17,7 +17,7 @@ class MutasiBhnBakuController extends Controller
                 $dtto = $request->input('dtto');
                 $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                 $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
-                $compcode = "BYC";
+                $compcode = session()->get('comp_code');
 
                 $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
 
@@ -59,7 +59,7 @@ class MutasiBhnBakuController extends Controller
         $dtto = $request->input('dtto');
         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
-        $compcode = "byc";
+        $compcode = session()->get('comp_code');
 
         $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
 
@@ -74,7 +74,7 @@ class MutasiBhnBakuController extends Controller
         $dtto = $request->input('dtto');
         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
-        $compcode = "byc";
+        $compcode = session()->get('comp_code');
 
         $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
 
