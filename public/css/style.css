@@ -193,7 +193,8 @@ label #sidebar_toggle:hover {
 
 .bg-img {
     /* The image used */
-    background-image: url("https://static.vecteezy.com/system/resources/previews/002/814/299/non_2x/geometric-shapes-of-dark-blue-colors-in-memphis-design-style-vector.jpg");
+    /* background-image: url("https://static.vecteezy.com/system/resources/previews/002/814/299/non_2x/geometric-shapes-of-dark-blue-colors-in-memphis-design-style-vector.jpg"); */
+    background-image: url(../img/wallpaper\ login\ 1wallpaper-backgorund-normal.png);
 
     /* Control the height of the image */
     min-height: 380px;

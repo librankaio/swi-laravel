@@ -19,45 +19,49 @@
         <section class="vh-100 bg-img">
             <div class="container py-5 h-100">
                 <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
-                    <div class="card-body p-5 text-center">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                        <h3 class="mb-5">IT INVENTORY ONLINE BC</h3>
-            
-                        <div class="form-outline mb-3 text-start">
-                        <label class="form-label" for="username">Username</label>
-                        <input type="text" id="username" class="form-control form-control-lg" placeholder="Username" name="username" required="required" autofocus/>
-                        </div>
-            
-                        <div class="form-outline mb-3 text-start">
-                        <label class="form-label" for="typePasswordX-2">Password</label>
-                        <input type="password" id="typePasswordX-2" class="form-control form-control-lg" placeholder="Password" name="password" required="required" autofocus/>
-                        </div>
-            
-                        <!-- Checkbox -->
-                        {{-- <div class="form-check d-flex justify-content-start mb-4">
-                        <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="form1Example3"
-                        />
-                        <label class="form-check-label" for="form1Example3"> Remember password </label>
-                        </div> --}}
-                        <br>
-                        <button class="btn btn-primary btn-lg btn-block" style="width:100%;" type="submit">Login</button>
-                        <div class="py-2"></div>
-                        <hr>
-                        {{-- <div class="login-form pt-2">
-                            Don't have an account?<a href="{{ 'register' }}">Register Here</a>
-                        </div> --}}
-                        <div class="login-form pt-2">
-                            <a href="https://swifect.com/" target="_blank">PT.Swifect Solusi Indonesia 2022 ©</a>
-                        </div>
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <img src="/img/logo-swifect-logo.png" alt=""></img>
+                        <h1 style="font-weight: bold; color: #2B58AF">IT INVENTORY ONLINE BC</h1>
                     </div>
-                    </div>
-                </div>
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            {{-- <h3 class="mb-5">IT INVENTORY ONLINE BC</h3> --}}
+                
+                            <div class="form-outline mb-3 text-start">
+                            <label class="form-label" for="username">Username</label>
+                            <input type="text" id="username" class="form-control form-control-lg" placeholder="Username" name="username" required="required" autofocus/>
+                            </div>
+                
+                            <div class="form-outline mb-3 text-start">
+                            <label class="form-label" for="typePasswordX-2">Password</label>
+                            <input type="password" id="typePasswordX-2" class="form-control form-control-lg" placeholder="Password" name="password" required="required" autofocus/>
+                            </div>
+                
+                            <!-- Checkbox -->
+                            {{-- <div class="form-check d-flex justify-content-start mb-4">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="form1Example3"
+                            />
+                            <label class="form-check-label" for="form1Example3"> Remember password </label>
+                            </div> --}}
+                            <br>
+                            <button class="btn btn-primary btn-lg btn-block" style="width:100%;" type="submit">Login</button>
+                            <div class="py-2"></div>
+                            <hr>
+                            {{-- <div class="login-form pt-2">
+                                Don't have an account?<a href="{{ 'register' }}">Register Here</a>
+                            </div> --}}
+                            <div class="login-form pt-2">
+                                <a href="https://swifect.com/" target="_blank">PT.Swifect Solusi Indonesia 2022 ©</a>
+                            </div>
+                        </div>
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </section>
