@@ -161,6 +161,7 @@ class PengeluaranController extends Controller
             $jenisdok = $request->input('jenisdok');
             $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
             $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+            $comp_name = session()->get('comp_name');
 
             $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->get();
 
@@ -172,13 +173,14 @@ class PengeluaranController extends Controller
             $dtto = $request->input('dtto');
             $jenisdok = $request->input('jenisdok');
             $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
-            $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+            $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');            
+            $comp_name = session()->get('comp_name');
 
             $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->get();
 
             // dd($results);
         }
-        return view('print.excel.pengeluaran_report', compact('results', 'datefrForm', 'datetoForm'));
+        return view('print.excel.pengeluaran_report', compact('results', 'datefrForm', 'datetoForm', 'comp_name'));
     }
 
     public function exportPdf(Request $request){

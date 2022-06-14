@@ -11,7 +11,8 @@
 <body class="idr" onload="window.print()">
 <div style="margin-left: 0%; margin-right: 0%;">
 <h5>LAPORAN PERTANGGUNG JAWABAN MUTASI LOG HISTORY<br>
-PT.{{ $comp_code }}<br>
+{{-- Nama Companny --}}
+{{ $comp_name }}<br>
 <?php
     if ($datefrForm == NULL AND $datetoForm == NULL) {
     }else{

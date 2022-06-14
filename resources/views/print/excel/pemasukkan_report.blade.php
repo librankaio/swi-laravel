@@ -11,7 +11,8 @@
 <body class="idr" onload="window.print()">
 <div style="margin-left: 0%; margin-right: 0%;">
 <h5>LAPORAN PERTANGGUNG JAWABAN PEMASUKAN DOKUMEN<br>
-PT.DUMMY INDONESIA<br>
+{{-- Nama Companny --}}
+{{ $comp_name }}<br>
 <?php
     if ($datefrForm == NULL AND $datetoForm == NULL) {
     }else{

@@ -5,13 +5,13 @@
 ?>
 <html>
 <head>
-
     <title>Mutasi Barang Jadi</title>
 </head>
 <body class="idr" onload="window.print()">
 <div style="margin-left: 0%; margin-right: 0%;">
 <h5>LAPORAN PERTANGGUNG JAWABAN MUTASI BARANG JADI<br>
-PT.{{ $compcode }}<br>
+{{-- Nama Companny --}}
+{{ $comp_name }}<br>
 <?php
     if ($datefrForm == NULL AND $datetoForm == NULL) {
     }else{

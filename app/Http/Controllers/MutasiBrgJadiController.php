@@ -59,12 +59,13 @@ class MutasiBrgJadiController extends Controller
         $dtto = $request->input('dtto');
         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
-        $compcode = session()->get('comp_code');
+        $comp_code = session()->get('comp_code');
+        $comp_name = session()->get('comp_name');
 
-        $results = DB::select('CALL rptmutasibarangjadi (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
+        $results = DB::select('CALL rptmutasibarangjadi (?,?,?)', [$datefrForm, $datetoForm, $comp_code]);
 
         // dd($results);
 
-        return view('print.excel.mutasibrgjadi_report', compact('results', 'datefrForm', 'datetoForm', 'compcode'));
+        return view('print.excel.mutasibrgjadi_report', compact('results', 'datefrForm', 'datetoForm', 'comp_name'));
     }
 }

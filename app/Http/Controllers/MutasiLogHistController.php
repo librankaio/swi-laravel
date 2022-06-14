@@ -30,9 +30,10 @@ class MutasiLogHistController extends Controller
         $datefrForm = date("Y-m-d",strtotime(str_replace('/', '-',$request->dtfrom)));
         $datetoForm = date("Y-m-d",strtotime(str_replace('/', '-',$request->dtto)));
         $comp_code = session()->get('comp_code');
+        $comp_name = session()->get('comp_name');
 
         $results = DB::select("SELECT * FROM userlog WHERE comp_code = '$comp_code' and DATE(datein) >= '".$datefrForm."' and DATE(datein) <= '".$datetoForm."'");
         
-        return view('print.excel.mutasiloghist_report', compact('results', 'datefrForm', 'datetoForm', 'comp_code'));
+        return view('print.excel.mutasiloghist_report', compact('results', 'datefrForm', 'datetoForm', 'comp_name'));
     }
 }
