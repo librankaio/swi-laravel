@@ -178,14 +178,14 @@
             <tbody align="center">
               @php 
               $no=0;         
-              $nomoraju = ""; @endphp        
+              $dpnomor = ""; @endphp        
               @isset($results)
                   {{-- @if(count($results) > 0) --}}
                   @if($no == 0)
 
                     @foreach ($results as $key => $item)  
                     <tr>
-                          @if( $item->nomoraju == $nomoraju)
+                          @if( $item->dpnomor == $dpnomor)
                             <td class="border-2"></td>
                             <td class="border-2"></td>
                             <td class="border-2"></td>
@@ -226,7 +226,7 @@
                           @endif
                         </tr>
                         @php 
-                        $nomoraju = $item->nomoraju
+                        $dpnomor = $item->dpnomor
                         @endphp
                     @endforeach
                   @elseif(count($results) == 0)
@@ -294,14 +294,14 @@
             <tbody style="font-size: 9px;">
               @php 
               $no=0;         
-              $nomoraju = ""; @endphp        
+              $dpnomor = ""; @endphp        
               @isset($results)
                   {{-- @if(count($results) > 0) --}}
                   @if($no == 0)
 
                     @foreach ($results as $key => $item)  
                     <tr>
-                          @if( $item->nomoraju == $nomoraju)
+                          @if( $item->dpnomor == $dpnomor)
                             <td class="border-2" style="width: 1px;"></td>
                             <td class="border-2"></td>
                             <td class="border-2"></td>
@@ -342,7 +342,7 @@
                           @endif
                         </tr>
                         @php 
-                        $nomoraju = $item->nomoraju
+                        $dpnomor = $item->dpnomor
                         @endphp
                     @endforeach
                   @elseif(count($results) == 0)

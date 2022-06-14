@@ -163,14 +163,14 @@
             <tbody align="center">
               @php 
               $no=0;         
-              $nomoraju = ""; @endphp        
+              $dpnomor = ""; @endphp        
               @isset($results)
                   {{-- @if(count($results) > 0) --}}
                   @if($no == 0)
 
                     @foreach ($results as $key => $item)  
                     <tr>
-                          @if( $item->nomoraju == $nomoraju)
+                          @if( $item->dpnomor == $dpnomor)
                             <td class="border-2"></td>
                             <td class="border-2"></td>
                             <td class="border-2"></td>
@@ -182,9 +182,9 @@
                           @php $no++ @endphp
                           <th scope="row" class="border-2">{{ $no }}</th>
                           <td class="border-2">{{ $item->jenis_dokumen }}</td>
-                          <td class="border-2">{{ $item->nomoraju }}</td>
-                          <td class="border-2">{{ date("d/m/Y", strtotime($item->dptanggal)) }}</td>
                           <td class="border-2">{{ $item->dpnomor }}</td>
+                          <td class="border-2">{{ date("d/m/Y", strtotime($item->dptanggal)) }}</td>
+                          <td class="border-2">{{ $item->bpbnomor }}</td>
                           <td class="border-2">{{ date("d/m/Y", strtotime($item->bpbtanggal)) }}</td>
                           <td class="border-2">{{ $item->pembeli_penerima }}</td>
                         @endif
@@ -209,7 +209,7 @@
                         @endif
                         </tr>
                         @php 
-                        $nomoraju = $item->nomoraju
+                        $dpnomor = $item->dpnomor
                         @endphp
                     @endforeach
                   @elseif(count($results) == 0)
@@ -257,14 +257,14 @@
             <tbody style="font-size: 9px;">
               @php 
               $no=0;         
-              $nomoraju = ""; @endphp        
+              $dpnomor = ""; @endphp        
               @isset($results)
                   {{-- @if(count($results) > 0) --}}
                   @if($no == 0)
 
                     @foreach ($results as $key => $item)  
                     <tr>
-                          @if( $item->nomoraju == $nomoraju)
+                          @if( $item->dpnomor == $dpnomor)
                             <td class="border-2" style="width: 1px;"></td>
                             <td class="border-2"></td>
                             <td class="border-2"></td>
@@ -276,9 +276,9 @@
                             @php $no++ @endphp
                             <th scope="row" class="border-2">{{ $no }}</th>
                             <td class="border-2">{{ $item->jenis_dokumen }}</td>
-                            <td class="border-2">{{ $item->nomoraju }}</td>
-                            <td class="border-2">{{ date("d/m/Y", strtotime($item->dptanggal)) }}</td>
                             <td class="border-2">{{ $item->dpnomor }}</td>
+                            <td class="border-2">{{ date("d/m/Y", strtotime($item->dptanggal)) }}</td>
+                            <td class="border-2">{{ $item->bpbnomor }}</td>
                             <td class="border-2">{{ date("d/m/Y", strtotime($item->bpbtanggal)) }}</td>
                             <td class="border-2">{{ $item->pembeli_penerima }}</td>
                           @endif
@@ -303,7 +303,7 @@
                           @endif
                         </tr>
                         @php 
-                        $nomoraju = $item->nomoraju
+                        $dpnomor = $item->dpnomor
                         @endphp
                     @endforeach
                   @elseif(count($results) == 0)
