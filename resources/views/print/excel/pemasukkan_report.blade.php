@@ -69,19 +69,19 @@ PERIODE {{ $datefrForm }} S.D {{ $datetoForm }}</h5>
             <td class="border-2">{{ $item->nama_barang }}</td>
             <td class="border-2">{{ $item->sat }}</td>
             @if ($item->jumlah == 0)
-            <td class="border-2">--</td>
+            <td class="border-2">0</td>
             @else
             <td class="border-2">{{ $item->jumlah }}</td>
             @endif
             @if ($item->nilai_barang == 0)
-            <td class="border-2">--</td>
+            <td class="border-2">0</td>
             @else
-            <td class="border-2">{{ 'Rp. '.number_format($item->nilai_barang, 2, '.', ',') }}</td>
+            <td class="border-2">{{ number_format($item->nilai_barang, 2, '.', ',') }}</td>
             @endif
             @if ($item->nilai_barang_usd == 0)
-            <td class="border-2">--</td>
+            <td class="border-2">0</td>
             @else
-            <td class="border-2">{{ '$. '.number_format($item->nilai_barang_usd, 2, '.', ',') }}</td>
+            <td class="border-2">{{ number_format($item->nilai_barang_usd, 2, '.', ',') }}</td>
             @endif
         </tr>
         @php 
