@@ -7,6 +7,11 @@
 <head>
 
     <title>Pengeluaran Dokumen</title>
+    <style type="text/css">
+        .text{
+        mso-number-format:"\@";/*force text*/
+        }
+    </style>
 </head>
 <body class="idr" onload="window.print()">
 <div style="margin-left: 0%; margin-right: 0%;">
@@ -60,7 +65,7 @@ PERIODE {{ $datefrForm }} S.D {{ $datetoForm }}</h5>
                 <td class="border-2">{{ $no }}</td>
                 <td class="border-2">{{ $item->jenis_dokumen }}</td>
                 @if (substr($item->dpnomor,0,1) == 0)
-                    <td class="border-2">{{ "'".$item->dpnomor }}</td>
+                    <td class="border-2 text">{{ "'".$item->dpnomor }}</td>
                 @else
                     <td class="border-2">{{ $item->dpnomor }}</td>
                 @endif 
