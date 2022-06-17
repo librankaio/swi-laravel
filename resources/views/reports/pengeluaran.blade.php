@@ -182,11 +182,7 @@
                           @php $no++ @endphp
                           <th scope="row" class="border-2">{{ $no }}</th>
                           <td class="border-2">{{ $item->jenis_dokumen }}</td>
-                          @if (substr($item->dpnomor,0,1) == 0)
-                              <td class="border-2">{{ "'".$item->dpnomor }}</td>
-                          @else
-                              <td class="border-2">{{ $item->dpnomor }}</td>
-                          @endif 
+                          <td class="border-2">{{ $item->dpnomor }}</td>                          
                           <td class="border-2">{{ date("d/m/Y", strtotime($item->dptanggal)) }}</td>
                           <td class="border-2">{{ $item->bpbnomor }}</td>
                           <td class="border-2">{{ date("d/m/Y", strtotime($item->bpbtanggal)) }}</td>
