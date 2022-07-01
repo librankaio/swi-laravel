@@ -35,7 +35,7 @@
                     </span>
                 </div>
                 <br>
-                  <button type="submit" class="btn btn-primary px-5"><span> View</span></button>
+                  <button type="submit" class="btn btn-primary px-5" onclick="show_loading()"><span> View</span></button>
               </div>              
             </div>
             <div class="col-md-6 bg-white">
