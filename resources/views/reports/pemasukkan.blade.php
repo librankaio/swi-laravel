@@ -42,6 +42,7 @@
                     <option value="BC 2.6.2">BC 2.6.2</option>
                     <option value="BC 2.7">BC 2.7</option>
                     <option value="BC 4.0">BC 4.0</option>
+                    <option value="PPFTZ">PPFTZ</option>
                   <?php }else{ ?>
                     <option selected value='{{ $_GET['jenisdok'] }}'>{{ $_GET['jenisdok'] }}</option>
                     <option value='All'>All</option>
@@ -49,6 +50,7 @@
                     <option value="BC 2.6.2">BC 2.6.2</option>
                     <option value="BC 2.7">BC 2.7</option>
                     <option value="BC 4.0">BC 4.0</option>
+                    <option value="PPFTZ">PPFTZ</option>
                   <?php } ?>
                 </select>
                 <br>
