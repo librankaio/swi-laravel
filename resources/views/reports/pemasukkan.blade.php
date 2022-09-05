@@ -213,6 +213,8 @@
                             <td class="border-2">--</td>
                           @else
                             <td class="border-2">{{ number_format($item->jumlah, 2, '.', ',') }}</td>
+                            {{-- @php $juml = number_format($item->jumlah, 2, '.', ','); @endphp --}}
+                            {{-- <td class="border-2">{{ strlen($juml) }}</td> --}}
                           @endif
 
                           @if ($item->nilai_barang == 0)

@@ -174,8 +174,8 @@
   <!-- END Form -->
 <script type="text/javascript">
   $(document).ready(function() {
-    $('#datatable').dataTable(
-            {"ordering":false});
+    // $('#datatable').dataTable(
+    //         {"ordering":false});
 
     $('#datatable').DataTable();
   });

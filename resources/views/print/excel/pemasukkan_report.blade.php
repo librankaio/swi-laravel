@@ -17,7 +17,7 @@
         }
     </style>
 </head>
-<body class="idr" onload="window.print()">
+<body class="usd" onload="window.print()">
 <div style="margin-left: 0%; margin-right: 0%;">
 <h5>LAPORAN PERTANGGUNG JAWABAN PEMASUKAN DOKUMEN<br>
 {{-- Nama Companny --}}
@@ -44,9 +44,9 @@ PERIODE {{ $datefrForm }} S.D {{ $datetoForm }}</h5>
         <td align="center" colspan="2" class="border-2">Nilai Barang</td>
         </tr>
         <tr>
-            <td align="center" scope="col" class="border-top-0 border-bottom-0  border-2">Nomor Aju</td>
-            <td align="center" scope="col" class="border-top-0 border-bottom-0  border-2">Tanggal</td>
             <td align="center" scope="col" class="border-top-0 border-bottom-0  border-2">Nomor Pendaftaran</td>
+            <td align="center" scope="col" class="border-top-0 border-bottom-0  border-2">Tanggal</td>
+            <td align="center" scope="col" class="border-top-0 border-bottom-0  border-2">Nomor</td>
             <td align="center" scope="col" class="border-top-0 border-bottom-0  border-2">Tanggal</td>
             <td align="center" scope="col" class="border-top-0 border-bottom-0  border-2">Rupiah</td>
             <td align="center" scope="col" class="border-top-0 border-bottom-0  border-2">USD</td>
