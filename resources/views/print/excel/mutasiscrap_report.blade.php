@@ -16,8 +16,12 @@
 <?php
     if ($datefrForm == NULL AND $datetoForm == NULL) {
     }else{
+        $datefr = strtotime($datefrForm);
+        $datefrFormat = date('d/m/Y',$datefr);
+        $dateto = strtotime($datetoForm);
+        $datetoFormat = date('d/m/Y',$dateto);   
 ?>
-PERIODE {{ $datefrForm }} S.D {{ $datetoForm }}</h5>
+PERIODE {{ $datefrFormat }} S.D {{ $datetoFormat }}</h5>
 <?php } ?>
 
 <center>
