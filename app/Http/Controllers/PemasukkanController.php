@@ -13,6 +13,7 @@ class PemasukkanController extends Controller
 {
     public function index(Request $request)
     {
+        // dd($request->all());
         if (isset($request->jenisdok)) {
             if ($request->searchtext == null) {
                 if ($request->jenisdok != "All") {
