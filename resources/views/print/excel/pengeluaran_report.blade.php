@@ -57,26 +57,35 @@
                 </tr>
                 @if(count($results) > 0)
                 @php $no=0;
-                $dpnomor = "" @endphp
+                $dpnomor = ""; 
+                $bpbnomor = ""; @endphp
                 @foreach ($results as $key => $item)
                 <tr>
-                    @if( $item->dpnomor == $dpnomor)
-                    <td class="border-2"></td>
-                    <td class="border-2"></td>
-                    <td class="border-2"></td>
-                    <td class="border-2"></td>
-                    <td class="border-2"></td>
-                    <td class="border-2"></td>
-                    <td class="border-2"></td>
+                    @if($item->dpnomor == $dpnomor && $item->bpbnomor == $bpbnomor)
+                        <td class="border-2"></td>
+                        <td class="border-2"></td>
+                        <td class="border-2"></td>
+                        <td class="border-2"></td>
+                        <td class="border-2"></td>
+                        <td class="border-2"></td>
+                        <td class="border-2"></td>
+                    @elseif($item->dpnomor == $dpnomor && $item->bpbnomor != $bpbnomor)
+                        <td class="border-2"></td>
+                        <td class="border-2"></td>
+                        <td class="border-2"></td>
+                        <td class="border-2"></td>
+                        <td class="border-2">{{ $item->bpbnomor }}</td>
+                        <td class="border-2">{{ date("d/m/Y", strtotime($item->bpbtanggal)) }}</td>
+                        <td class="border-2">{{ $item->pembeli_penerima }}</td>
                     @else
-                    @php $no++ @endphp
-                    <td class="border-2">{{ $no }}</td>
-                    <td class="border-2">{{ $item->jenis_dokumen }}</td>
-                    <td class="border-2" style="mso-number-format:'@';">{{ $item->dpnomor }}</td>
-                    <td class="border-2">{{ date("d/m/Y", strtotime($item->dptanggal)) }}</td>
-                    <td class="border-2">{{ $item->bpbnomor }}</td>
-                    <td class="border-2">{{ date("d/m/Y", strtotime($item->bpbtanggal)) }}</td>
-                    <td class="border-2">{{ $item->pembeli_penerima }}</td>
+                        @php $no++ @endphp
+                        <td class="border-2">{{ $no }}</td>
+                        <td class="border-2">{{ $item->jenis_dokumen }}</td>
+                        <td class="border-2" style="mso-number-format:'@';">{{ $item->dpnomor }}</td>
+                        <td class="border-2">{{ date("d/m/Y", strtotime($item->dptanggal)) }}</td>
+                        <td class="border-2">{{ $item->bpbnomor }}</td>
+                        <td class="border-2">{{ date("d/m/Y", strtotime($item->bpbtanggal)) }}</td>
+                        <td class="border-2">{{ $item->pembeli_penerima }}</td>
                     @endif
                     <td class="border-2">{{ $item->kode_barang }}</td>
                     <td class="border-2">{{ $item->nama_barang }}</td>
@@ -99,6 +108,7 @@
                 </tr>
                 @php
                 $dpnomor = $item->dpnomor
+                $bpbnomor = $item->bpbnomor
                 @endphp
                 @endforeach
                 @elseif(count($results) == 0)
