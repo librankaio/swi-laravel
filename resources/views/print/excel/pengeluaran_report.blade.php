@@ -107,8 +107,8 @@
                     @endif
                 </tr>
                 @php
-                $dpnomor = $item->dpnomor
-                $bpbnomor = $item->bpbnomor
+                $dpnomor = $item->dpnomor;
+                $bpbnomor = $item->bpbnomor;
                 @endphp
                 @endforeach
                 @elseif(count($results) == 0)
