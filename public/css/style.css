@@ -215,3 +215,33 @@ label #sidebar_toggle:hover {
     height: 60px;
     margin-left: 23px;
 }
+
+body.usd td.currency:before {
+    content: "USD\A0$";
+}
+body.idr td.currency:before {
+    content: "Rp\A0";
+}
+body.eur td.currency:before {
+    content: "EUR\A0\20AC\A0";
+}
+body.aud td.currency:before {
+    content: "AUD\A0$";
+}
+
+body.eur tr.usd,
+body.eur tr.aud {
+    display: none;
+}
+body.idr tr.eur,
+body.idr tr.aud {
+    display: none;
+}
+body.usd tr.eur,
+body.usd tr.aud {
+    display: none;
+}
+body.aud tr.eur,
+body.aud tr.usd {
+    display: none;
+}

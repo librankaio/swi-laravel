@@ -47,7 +47,7 @@ class PemasukkanController extends Controller
                     // $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('tstatus', '=', 1)->get();
 
                     $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
-
+                    // dd($results);
                     return view('reports.pemasukkan', [
                         'results' => $results
                     ]);

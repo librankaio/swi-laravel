@@ -20,7 +20,7 @@
     </style>
 </head>
 
-<body class="usd" onload="window.print()">
+<body class="idr" onload="window.print()">
     <div style="margin-left: 0%; margin-right: 0%;">
         <h5>LAPORAN PERTANGGUNG JAWABAN PEMASUKAN DOKUMEN<br>
             {{-- Nama Companny --}}
