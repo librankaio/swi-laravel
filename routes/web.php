@@ -44,6 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Pemasukkan
     Route::get('pemasukan', [PemasukkanController::class, 'index'])->name('pemasukan');
     Route::get('exportexcelpemasukan', [PemasukkanController::class, 'exportExcel'])->name('exportexcel');
+    // Route::get('exportpdfpemasukan', [PemasukkanController::class, 'exportPdf'])->name('exportpdf');
     Route::get('exportpdfpemasukan', [PemasukkanController::class, 'exportPdf'])->name('exportpdf');
     
     //Pengeluaran

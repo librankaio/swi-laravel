@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pemasukkan;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PDF;
 
 class PemasukkanController extends Controller
 {
@@ -200,6 +202,12 @@ class PemasukkanController extends Controller
 
             $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->get();
 
+
+            if($request->has('download'))
+            {
+                $pdf = DomPDFPDF::loadView('print.pdf.pemasukkan_report',compact('results'));
+                    return $pdf->stream('pdfview.pdf');
+            }
             // $results = DB::select('EXEC rptTest ?,?,?', [$datefrForm, $datetoForm, $jenisdok]);
 
             // dd($results);
@@ -211,6 +219,12 @@ class PemasukkanController extends Controller
             $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
 
             $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->get();
+
+            if($request->has('download'))
+            {
+                $pdf = DomPDFPDF::loadView('print.pdf.pemasukkan_report',compact('results'));
+                    return $pdf->stream('pdfview.pdf');    
+            }
         }
         return view('print.pdf.pemasukkan_report', compact('results', 'datefrForm', 'datetoForm'));
     }
