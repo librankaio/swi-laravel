@@ -3,8 +3,8 @@
   header("Content-Disposition: attachment; filename=\"$filename\"");
   header("Content-Type: application/vnd.ms-excel");
   setlocale(LC_ALL,"US")
-  setlocale(LC_MONETARY,"US")
-  setlocale(LC_NUMERIC,"US")
+//   setlocale(LC_MONETARY,"US")
+//   setlocale(LC_NUMERIC,"US")
 ?>
 <html>
 
