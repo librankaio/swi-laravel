@@ -2,6 +2,7 @@
   $filename = "Mutasi_Mesin.xls";
   header("Content-Disposition: attachment; filename=\"$filename\"");
   header("Content-Type: application/vnd.ms-excel");
+  setlocale(LC_ALL,"US");
 ?>
 <html>
 

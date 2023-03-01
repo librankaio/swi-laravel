@@ -109,8 +109,8 @@
         <div class="row d-flex">
           <div class="col-md-6"></div>
           <div class="col-md-6 text-end">
-            {{-- <button type="submit" formaction="exportpdfpemasukan" formtarget="_blank" class="btn btn-danger"><i
-                class="fa-regular fa-file-pdf"></i><span> Export PDF</span></button> --}}
+              {{-- <button type="submit" formaction="exportpdfpemasukan" formtarget="_blank" class="btn btn-danger"><i
+                  class="fa-regular fa-file-pdf"></i><span> Export PDF</span></button> --}}
                 {{-- <a class="btn btn-primary" href="{{route('print.pdf.pemasukkan_report',['download'=>'pdf'])}}">Download PDF</a> --}}
             <button type="submit" formaction="exportexcelpemasukan" class="btn btn-success"><i
                 class="far fa-file-excel"></i><span> Export Excel</span></button>
