@@ -100,7 +100,7 @@
                     @if ($item->jumlah == 0)
                     <td class="border-2">0</td>
                     @else
-                    <td class="border-2">{{ $item->jumlah }}</td>
+                    <td class="border-2">{{ number_format($item->jumlah, 2, '.', ',')}}</td>
                     @endif
                     @if ($item->nilai_barang == 0)
                     <td class="border-2">0</td>
