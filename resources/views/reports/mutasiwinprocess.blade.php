@@ -76,10 +76,9 @@
         <div class="row d-flex">
           <div class="col-md-6"></div>
           <div class="col-md-6 text-end">
+            <button type="submit" class="btn btn-danger" formaction="exportpdfmutasiwip" formtarget="_blank"><i class="fas fa-print"></i><span> Print</span></button>           
             <button type="submit" formaction="exportexcelmutasiwip" class="btn btn-success"><i
                 class="far fa-file-excel"></i><span> Export Excel</span></button>
-            {{-- <button type="button" class="btn btn-primary"><i class="fas fa-print"></i><span> Print</span></button>
-            --}}
           </div>
         </div>
       </div>

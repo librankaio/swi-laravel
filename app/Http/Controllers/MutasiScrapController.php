@@ -68,4 +68,20 @@ class MutasiScrapController extends Controller
 
         return view('print.excel.mutasiscrap_report', compact('results', 'datefrForm', 'datetoForm', 'comp_name'));
     }
+
+    public function exportPdf(Request $request)
+    {
+        $dtfr = $request->input('dtfrom');
+        $dtto = $request->input('dtto');
+        $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+        $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+        $compcode = session()->get('comp_code');
+        $comp_name = session()->get('comp_name');
+
+        $results = DB::select('CALL rptmutasiscrap (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
+
+        // dd($results);
+
+        return view('print.pdf.mutasiscrap_report', compact('results', 'datefrForm', 'datetoForm', 'compcode','comp_name'));
+    }
 }

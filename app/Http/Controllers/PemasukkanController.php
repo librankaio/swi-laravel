@@ -203,11 +203,11 @@ class PemasukkanController extends Controller
             $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->get();
 
 
-            if($request->has('download'))
-            {
-                $pdf = DomPDFPDF::loadView('print.pdf.pemasukkan_report',compact('results'));
-                    return $pdf->stream('pdfview.pdf');
-            }
+            // if($request->has('download'))
+            // {
+            //     $pdf = DomPDFPDF::loadView('print.pdf.pemasukkan_report',compact('results'));
+            //         return $pdf->stream('pdfview.pdf');
+            // }
             // $results = DB::select('EXEC rptTest ?,?,?', [$datefrForm, $datetoForm, $jenisdok]);
 
             // dd($results);
@@ -220,11 +220,11 @@ class PemasukkanController extends Controller
 
             $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->get();
 
-            if($request->has('download'))
-            {
-                $pdf = DomPDFPDF::loadView('print.pdf.pemasukkan_report',compact('results'));
-                    return $pdf->stream('pdfview.pdf');    
-            }
+            // if($request->has('download'))
+            // {
+            //     $pdf = DomPDFPDF::loadView('print.pdf.pemasukkan_report',compact('results'));
+            //         return $pdf->stream('pdfview.pdf');    
+            // }
         }
         return view('print.pdf.pemasukkan_report', compact('results', 'datefrForm', 'datetoForm'));
     }

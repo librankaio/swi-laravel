@@ -105,7 +105,7 @@
           <div class="row d-flex">
             <div class="col-md-6"></div>
             <div class="col-md-6 text-end">
-                {{-- <button type="submit" formaction="exportpdfpengeluaran" formtarget="_blank" class="btn btn-danger"><i class="fa-regular fa-file-pdf"></i><span> Export PDF</span></button> --}}
+                <button type="submit" formaction="exportpdfpengeluaran" formtarget="_blank" class="btn btn-danger"><i class="fa-regular fa-file-pdf"></i><span> Export PDF</span></button>
                 <button type="submit" formaction="exportexcelpengeluaran" class="btn btn-success"><i class="far fa-file-excel"></i><span> Export Excel</span></button> 
               {{-- <button type="button" class="btn btn-primary"><i class="fas fa-print"></i><span> Print</span></button> --}}
             </div>

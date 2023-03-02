@@ -61,20 +61,25 @@ Route::group(['middleware' => ['auth']], function () {
     //MutasiBarangJAdi
     Route::get('mutasibrgjadi', [MutasiBrgJadiController::class, 'index'])->name('mutasibrgjadi');
     Route::get('exportexcelbrgjadi', [MutasiBrgJadiController::class, 'exportExcel'])->name('exportexcel');
+    Route::get('exportpdfbrgjadi', [MutasiBrgJadiController::class, 'exportPdf'])->name('exportPdf');
 
     // MutasiScrap
     Route::get('mutasiscrap', [MutasiScrapController::class, 'index'])->name('mutasiscrap');
     Route::get('exportexcelscrap', [MutasiScrapController::class, 'exportExcel'])->name('exportexcel');
+    Route::get('exportpdfscrap', [MutasiScrapController::class, 'exportPdf'])->name('exportpdf');
 
     // MutasiMesin
     Route::get('mutasimesin', [MutasiMesinController::class, 'index'])->name('mutasimesin');
     Route::get('exportexcelmutasimesin', [MutasiMesinController::class, 'exportExcel'])->name('exportexcel');
+    Route::get('exportpdfmutasimesin', [MutasiMesinController::class, 'exportPdf'])->name('exportpdf');
 
     // MutasiWorkInProcess
     Route::get('mutasiwip', [MutasiWinProcessController::class, 'index'])->name('mutasiwip');
     Route::get('exportexcelmutasiwip', [MutasiWinProcessController::class, 'exportExcel'])->name('exportexcel');
+    Route::get('exportpdfmutasiwip', [MutasiWinProcessController::class, 'exportPdf'])->name('exportpdf');
 
     // MutasiLogHist
     Route::get('mutasiloghist', [MutasiLogHistController::class, 'index'])->name('mutasiloghist');
     Route::get('exportexcelmutasiloghist', [MutasiLogHistController::class, 'exportExcel'])->name('exportexcel');
+    Route::get('exportpdfmutasiloghist', [MutasiLogHistController::class, 'exportPdf'])->name('exportpdf');
 });
