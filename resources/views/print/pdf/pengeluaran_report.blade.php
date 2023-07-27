@@ -16,93 +16,108 @@ PERIODE {{ $datefrForm }} S.D {{ $datetoForm }}</h5>
 <?php } ?>
 <center>
 <table id="mytable" border="1px" cellspacing="0">
-       <tr>
-                            <td align="center" rowspan="2">No</td>
-                            <td align="center" rowspan="2">Jenis Dokumen</td>
-                            <td align="center" colspan="2">Dokumen Pabean</td>
-                            <td align="center" colspan="2">Bukti Penerimaan Barang</td>
-                            <td align="center" rowspan="2">Pemasok Pengirim</td>
-                            <td align="center" rowspan="2">Kode Barang</td>
-                            <td width="30px" align="center" rowspan="2">Nama Barang</td>
-                            <td align="center" rowspan="2">Satuan</td>
-                            <td align="center" rowspan="2">Jumlah</td>
-                            <td align="center" colspan="2">Nilai Barang</td>
+                        <tr>
+                            <td scope="col" class="border-bottom-0 border-2">No</td>
+                            <td scope="col" class="border-bottom-0 border-2">Jenis Dokumen</td>
+                            <td align="center" colspan="2" class="border-2">Dokumen Pabean</td>
+                            <td align="center" colspan="2" class="border-2">Pengeluaran Barang</td>
+                            <td scope="col" class="border-bottom-0 border-2">Customer</td>
+                            <td scope="col" class="border-bottom-0 border-2">Kode Barang</td>
+                            <td scope="col" class="border-bottom-0 border-2">Nama Barang</td>
+                            <td scope="col" class="border-bottom-0 border-2">Satuan</td>
+                            <td scope="col" class="border-bottom-0 border-2">Jumlah</td>
+                            <td align="center" colspan="2" class="border-2">Nilai Barang</td>
                         </tr>
                         <tr>
-                            <td align="center">Nomor</td>
+                            {{-- <td align="center">Nomor</td>
                             <td align="center">Tanggal</td>
                             <td align="center">Nomor</td>
                             <td align="center">Tanggal</td>
                             <td align="center">USD</td>
-                            <td align="center">Rupiah</td>
+                            <td align="center">Rupiah</td> --}}
+                            <th scope="col" class="border-top-0 border-bottom-0 border-2"></th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2"></th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2">Nomor Pendaftaran</th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2">Tanggal</th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2">Nomor</th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2">Tanggal</th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2"></th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2"></th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2"></th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2"></th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2"></th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2">Rupiah</th>
+                            <th scope="col" class="border-top-0 border-bottom-0  border-2">USD</th>
                         </tr>                        
-                        <?php
-                            $no = 0;
-                            $nomoraju="";
-                        ?>
-                        @foreach($results as $item)
-                        <tr>
-                        <?php
-                        if ($no==0)
-                        {
-                            $no++;
-                        ?>   
-                        <td><div style="width: 50px; word-wrap: break-word;" >{{ $no }}</div></td>
-                            <td><div style="width: 50px; word-wrap: break-word;" >{{ $item->jenis_dokumen }}</div></td>
-                            <td><div style="width: 50px; word-wrap: break-word;" >{{ $item->dpnomor }}</div></td>
-                            <td><div style="width: 50px; word-wrap: break-word;" >{{ date("d/m/Y", strtotime($item->dptanggal))  }}</div></td>
-                            <td><div style="width: 60px; word-wrap: break-word; " >{{ $item->bpbnomor }}</div></td>
-                            <td><div style="width: 50px; word-wrap: break-word;" >@if(date("d/m/Y", strtotime($item->bpbtanggal)) != '30/11/-0001')
-                                {{ date("d/m/Y", strtotime($item->bpbtanggal)) }}
-                                @else
-                                @endif</div></td>
-                            <td><div style="width: 100px; word-wrap: break-word;" >{{ $item->pemasok_pengirim }}</div></td>
-                        <?php    
-                        }
-                        else
-                        {
-                                if ( $nomoraju == $item->nomoraju )
-                                {
-                                ?>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                <?php
-                                }
-                                else
-                                {
-                                    $no++;
-                                ?>    
-                                    <td><div style="width: 50px; word-wrap: break-word;" >{{ $no }}</div></td>
-                                    <td><div style="width: 50px; word-wrap: break-word;" >{{ $item->jenis_dokumen }}</div></td>
-                                    <td><div style="width: 50px; word-wrap: break-word;" >{{ $item->dpnomor }}</div></td>
-                                    <td><div style="width: 50px; word-wrap: break-word;" >{{ date("d/m/Y", strtotime($item->dptanggal))  }}</div></td>
-                                    <td><div style="width: 60px; word-wrap: break-word; " >{{ $item->bpbnomor }}</div></td>
-                                    <td><div style="width: 50px; word-wrap: break-word;" >@if(date("d/m/Y", strtotime($item->bpbtanggal)) != '30/11/-0001')
-                                        {{ date("d/m/Y", strtotime($item->bpbtanggal)) }}
-                                        @else
-                                        @endif</div></td>
-                                    <td><div style="width: 100px; word-wrap: break-word;" >{{ $item->pemasok_pengirim }}</div></td>
-                                <?php
-                                }
-                        }
-                        ?>
-                        
-                            <td><div style="width: 50px; word-wrap: break-word;" >{{ $item->kode_barang }}</div></td>
-                            <td><div style="width: 100px; word-wrap: break-word;" >{{ $item->nama_barang }}</div></td>
-                            <td><div style="width: 50px; word-wrap: break-word;" >{{ $item->sat }}</div></td>
-                            <td><div style="width: 50px; word-wrap: break-word;" >{{ number_format($item->jumlah, 2, '.', ',') }}</div></td>
-                            <td><div style="width: 100px; word-wrap: break-word;" >$ {{ number_format($item->nilai_barang_usd, 2, '.', ',') }}</div></td>
-                            <td><div style="width: 100px; word-wrap: break-word;" >Rp. {{ number_format($item->nilai_barang, 2, '.', ',') }}</div></td>
+                       <tbody align="center">
+              @php 
+              $no=0;         
+              $dpnomor = "";
+              $bpbnomor = ""; @endphp     
+              @isset($results)
+                  {{-- @if(count($results) > 0) --}}
+                  @if($no == 0)
+
+                    @foreach ($results as $key => $item)  
+                    <tr>
+                          @if( $item->dpnomor == $dpnomor && $item->bpbnomor == $bpbnomor)
+                            <td class="border-2"></td>
+                            <td class="border-2"></td>
+                            <td class="border-2"></td>
+                            <td class="border-2"></td>
+                            <td class="border-2"></td>
+                            <td class="border-2"></td>
+                            <td class="border-2"></td>
+                          @elseif($item->dpnomor == $dpnomor && $item->bpbnomor != $bpbnomor)
+                            <td class="border-2"></td>
+                            <td class="border-2"></td>
+                            <td class="border-2"></td>
+                            <td class="border-2"></td>
+                            <td class="border-2">{{ $item->bpbnomor }}</td>
+                            <td class="border-2">{{ date("d/m/Y", strtotime($item->bpbtanggal)) }}</td>
+                            <td class="border-2">{{ $item->pembeli_penerima }}</td>
+                          @else
+                            @php $no++ @endphp
+                            <th scope="row" class="border-2">{{ $no }}</th>
+                            <td class="border-2">{{ $item->jenis_dokumen }}</td>
+                            <td class="border-2">{{ $item->dpnomor }}</td>                          
+                            <td class="border-2">{{ date("d/m/Y", strtotime($item->dptanggal)) }}</td>
+                            <td class="border-2">{{ $item->bpbnomor }}</td>
+                            <td class="border-2">{{ date("d/m/Y", strtotime($item->bpbtanggal)) }}</td>
+                            <td class="border-2">{{ $item->pembeli_penerima }}</td>
+                        @endif
+                        <td class="border-2">{{ $item->kode_barang }}</td>
+                        <td class="border-2">{{ $item->nama_barang }}</td>
+                        <td class="border-2">{{ $item->sat }}</td>
+
+                        @if ($item->jumlah == 0)
+                        <td class="border-2">--</td>
+                        @else
+                        <td class="border-2">{{ number_format($item->jumlah, 2, '.', ',') }}</td>
+                        @endif
+                        @if ($item->nilai_barang == 0)
+                        <td class="border-2">--</td>
+                        @else
+                        <td class="border-2">{{ 'Rp. '.number_format($item->nilai_barang, 2, '.', ',') }}</td>
+                        @endif
+                        @if ($item->nilai_barang_usd == 0)
+                        <td class="border-2">--</td>
+                        @else
+                        <td class="border-2">{{ '$. '.number_format($item->nilai_barang_usd, 2, '.', ',') }}</td>
+                        @endif
                         </tr>
-                        <?php
-                        $nomoraju=$item->nomoraju;
-                        ?>
-                        @endforeach
+                        @php 
+                        $dpnomor = $item->dpnomor;
+                        $bpbnomor = $item->bpbnomor;
+                        @endphp
+                    @endforeach
+                  @elseif(count($results) == 0)
+                    <td colspan="13" class="border-2"> 
+                      <label for="noresult" class="form-label">NO DATA RESULTS...</label>
+                    </td>
+                  @endif
+              @endisset
+            </tbody> 
     </table>
 </center>
 <br><br>

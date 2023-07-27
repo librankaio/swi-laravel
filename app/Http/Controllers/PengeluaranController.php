@@ -191,7 +191,7 @@ class PengeluaranController extends Controller
             $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
             $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
 
-            $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->get();
+            $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->get();
 
             // $results = DB::select('EXEC rptTest ?,?,?', [$datefrForm, $datetoForm, $jenisdok]);
 
@@ -203,7 +203,7 @@ class PengeluaranController extends Controller
             $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
             $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
 
-            $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->get();
+            $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->get();
         }
         return view('print.pdf.pengeluaran_report', compact('results', 'datefrForm', 'datetoForm'));
     }
