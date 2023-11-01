@@ -15,7 +15,8 @@
     @php
     $imgname = session('comp_code');
     @endphp
-    <img src='/img/{{ $imgname }}.png' alt="" class="profile_img"></img>
+    <img src='{{ asset('../img/{{ $imgname }}.png') }}' alt="" class="profile_img"></img>
+    {{-- <img src='/img/{{ $imgname }}.png' alt="" class="profile_img"></img> --}}
     <h4>{{ session('comp_name') }}</h4>
   </center>
   <a href="{{ 'pemasukan' }}" class="btn_Nav {{ 'pemasukan' == request()->path() ? 'btn_NavActive' : '' }}"><i
