@@ -321,29 +321,66 @@
                       <label for="noresult" class="form-label">NO DATA RESULTS...</label>
                     </td>
                   @endif
-              @endisset
+              {{-- @endisset --}}
             </tbody>
           </table>
       </div>
       {{-- END RESPONSIVE TABLE IN XL --}}
         <div class="row">
-          <div class="col-md-6 py-3">
+          {{-- <div class="col-md-6 py-3">
             <div class="d-flex justify-content-start">
-              {{-- Showing
+              Showing
               {{ $results->firstItem() }}
               to
               {{ $results->lastItem() }}
               of
               {{ $results->total() }}
-              Entries --}}
+              Entries
             </div>
-          </div>
-          <div class="col-md-6">
+          </div> --}}
+          <div class="col-md-12 pt-3">
             <div class="d-flex justify-content-end">
+              <div class="px-2 pt-1">
+                <label for="totalSaldo" class="form-label">Total Rp.</label>
+                @if(isset($results))
+                  @php $nilai_brg_idr = 0; @endphp
+                  @foreach($results as $item2)
+                      @if($nilai_brg_idr == 0)
+                          @php $nilai_brg_idr = $nilai_brg_idr + $item2->nilai_barang @endphp
+                      @else
+                          @php $nilai_brg_idr = $nilai_brg_idr + $item2->nilai_barang @endphp
+                      @endif
+                  @endforeach
+                    <input type="text" class="form-control" style="height: 30px; width: 150px;" value="{{ number_format($nilai_brg_idr, 2, '.', ',') }}" readonly>
+                @else
+                    <input type="text" class="form-control" style="height: 30px; width: 150px;" value="0" readonly>
+                @endif
+              </div>
+              <div class="px-2 pt-1">
+                <label for="totalSaldo" class="form-label">Total USD ($)</label>
+                @if(isset($results))
+                  @php $nilai_brg_usd = 0; @endphp
+                  @foreach($results as $item3)
+                      @if($nilai_brg_usd == 0)
+                          @php $nilai_brg_usd = $nilai_brg_usd + $item3->nilai_barang_usd @endphp
+                      @else
+                          @php $nilai_brg_usd = $nilai_brg_usd + $item3->nilai_barang_usd @endphp
+                      @endif
+                  @endforeach
+                    <input type="text" class="form-control" style="height: 30px; width: 150px;" value="{{ number_format($nilai_brg_usd, 2, '.', ',') }}" readonly>
+                @else
+                    <input type="text" class="form-control" style="height: 30px; width: 150px;" value="0" readonly>
+                @endif
+              </div>
               {{-- {{ $results->appends(request()->input())->links() }} --}}
             </div>
           </div>
-          {{-- @endisset --}}
+          {{-- <div class="col-md-6">
+            <div class="d-flex justify-content-end">
+              {{ $results->appends(request()->input())->links() }}
+            </div>
+          </div> --}}
+          @endisset
         </div>
       </div>  
   </form>
