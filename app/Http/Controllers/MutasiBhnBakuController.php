@@ -44,7 +44,7 @@ class MutasiBhnBakuController extends Controller
                 $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
 
                 $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('tstatus', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('dpnomor', '=', $searchtext)->paginate(10);
-
+                
                 return view('reports.mutasibhnbaku', [
                     'results' => $results
                 ]);
