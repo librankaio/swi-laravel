@@ -163,8 +163,8 @@
         </tbody>
       </table>
       <div class="row">
-        <div class="col-md-6 py-3">
-          {{-- <div class="d-flex justify-content-start">
+        {{-- <div class="col-md-6 py-3">
+          <div class="d-flex justify-content-start">
             Showing
             {{ $results->firstItem() }}
             to
@@ -172,10 +172,31 @@
             of
             {{ $results->total() }}
             Entries
-          </div> --}}
-        </div>
-        <div class="col-md-6">
+          </div>
+        </div> --}}
+        {{-- <div class="col-md-6">
           <div class="d-flex justify-content-end">
+            {{ $results->appends(request()->input())->links() }}
+          </div>
+        </div> --}}
+        <div class="col-md-12 pt-3">
+          <div class="d-flex justify-content-end">
+            <div class="px-2 pt-1">
+              <label for="totalSaldo" class="form-label">Total Barang</label>
+              @if(isset($results))
+                @php $total_stock = 0; @endphp
+                @foreach($results as $item2)
+                    @if($total_stock == 0)
+                        @php $total_stock = $total_stock + $item2->stock_akhir @endphp
+                    @else
+                        @php $total_stock = $total_stock + $item2->stock_akhir @endphp
+                    @endif
+                @endforeach
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="{{ number_format($total_stock, 2, '.', ',') }}" readonly>
+              @else
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="0" readonly>
+              @endif
+            </div>
             {{-- {{ $results->appends(request()->input())->links() }} --}}
           </div>
         </div>

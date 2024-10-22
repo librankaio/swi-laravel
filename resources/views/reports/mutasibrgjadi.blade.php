@@ -183,8 +183,8 @@
         </tbody>
       </table>
       <div class="row">
-        <div class="col-md-6 py-3">
-          {{-- <div class="d-flex justify-content-start">
+        {{-- <div class="col-md-6 py-3">
+          <div class="d-flex justify-content-start">
             Showing
             {{ $results->firstItem() }}
             to
@@ -192,10 +192,111 @@
             of
             {{ $results->total() }}
             Entries
-          </div> --}}
-        </div>
-        <div class="col-md-6">
+          </div>
+        </div> --}}
+        {{-- <div class="col-md-6">
           <div class="d-flex justify-content-end">
+            {{ $results->appends(request()->input())->links() }}
+          </div>
+        </div> --}}
+        <div class="col-md-12 pt-3">
+          <div class="d-flex justify-content-end">
+            <div class="px-2 pt-1">
+              <label for="totalSaldo" class="form-label">Total Saldo Awal</label>
+              @if(isset($results))
+                @php $total_stock_awal = 0; @endphp
+                @foreach($results as $item2)
+                    @if($total_stock_awal == 0)
+                        @php $total_stock_awal = $total_stock_awal + $item2->stock_awal @endphp
+                    @else
+                        @php $total_stock_awal = $total_stock_awal + $item2->stock_awal @endphp
+                    @endif
+                @endforeach
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="{{ number_format($total_stock_awal, 2, '.', ',') }}" readonly>
+              @else
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="0" readonly>
+              @endif
+            </div>
+            <div class="px-2 pt-1">
+              <label for="totalSaldo" class="form-label">Total Pemasukan</label>
+              @if(isset($results))
+                @php $total_stock_in = 0; @endphp
+                @foreach($results as $item3)
+                    @if($total_stock_in == 0)
+                        @php $total_stock_in = $total_stock_in + $item3->stock_in @endphp
+                    @else
+                        @php $total_stock_in = $total_stock_in + $item3->stock_in @endphp
+                    @endif
+                @endforeach
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="{{ number_format($total_stock_in, 2, '.', ',') }}" readonly>
+              @else
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="0" readonly>
+              @endif
+            </div>
+            <div class="px-2 pt-1">
+              <label for="totalSaldo" class="form-label">Total Pengeluaran</label>
+              @if(isset($results))
+                @php $total_stock_out = 0; @endphp
+                @foreach($results as $item4)
+                    @if($total_stock_out == 0)
+                        @php $total_stock_out = $total_stock_out + $item4->stock_in @endphp
+                    @else
+                        @php $total_stock_out = $total_stock_out + $item4->stock_in @endphp
+                    @endif
+                @endforeach
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="{{ number_format($total_stock_out, 2, '.', ',') }}" readonly>
+              @else
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="0" readonly>
+              @endif
+            </div>
+            <div class="px-2 pt-1">
+              <label for="totalSaldo" class="form-label">Total Adjustment</label>
+              @if(isset($results))
+                @php $total_stock_adj = 0; @endphp
+                @foreach($results as $item5)
+                    @if($total_stock_adj == 0)
+                        @php $total_stock_adj = $total_stock_adj + 0 @endphp
+                    @else
+                        @php $total_stock_adj = $total_stock_adj + 0 @endphp
+                    @endif
+                @endforeach
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="{{ number_format($total_stock_adj, 2, '.', ',') }}" readonly>
+              @else
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="0" readonly>
+              @endif
+            </div>
+            <div class="px-2 pt-1">
+              <label for="totalSaldo" class="form-label">Total Stock Akhir</label>
+              @if(isset($results))
+                @php $total_stock_akhir = 0; @endphp
+                @foreach($results as $item6)
+                    @if($total_stock_akhir == 0)
+                        @php $total_stock_akhir = $total_stock_akhir + $item6->stock_akhir @endphp
+                    @else
+                        @php $total_stock_akhir = $total_stock_akhir + $item6->stock_akhir @endphp
+                    @endif
+                @endforeach
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="{{ number_format($total_stock_akhir, 2, '.', ',') }}" readonly>
+              @else
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="0" readonly>
+              @endif
+            </div>
+            <div class="px-2 pt-1">
+              <label for="totalSaldo" class="form-label">Total Stock Opname</label>
+              @if(isset($results))
+                @php $total_stock_opname = 0; @endphp
+                @foreach($results as $item7)
+                    @if($total_stock_opname == 0)
+                        @php $total_stock_opname = $total_stock_opname + $item7->stock_opname @endphp
+                    @else
+                        @php $total_stock_opname = $total_stock_opname + $item7->stock_opname @endphp
+                    @endif
+                @endforeach
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="{{ number_format($total_stock_opname, 2, '.', ',') }}" readonly>
+              @else
+                  <input type="text" class="form-control" style="height: 30px; width: 150px;" value="0" readonly>
+              @endif
+            </div>
             {{-- {{ $results->appends(request()->input())->links() }} --}}
           </div>
         </div>
