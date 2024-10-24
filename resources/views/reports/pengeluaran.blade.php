@@ -113,16 +113,42 @@
         </div>
         <div class="nav-table py-2 px-1">
           <div class="row d-flex">
-            <div class="col-md-6"></div>
-            <div class="col-md-2"></div>
-            <div class="col-md-2">
-              <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6 text-end">
-                  <label for="searchtext" class="form-label py-2">Search :</label>
-                </div>
+            <div class="col-md-4"></div>
+          <div class="col-md-3">
+            <div class="row">
+              <div class="col-md-9"></div>
+              <div class="col-md-3">
+                <label for="searchtext" class="form-label py-2">Search Type :</label>
               </div>
             </div>
+          </div>
+          <div class="col-md-3">
+            <div class="row">
+              <div class="col-md-6">
+                <select class="form-select" aria-label="Default select example" name="jenis_pencarian">
+                  <?php 
+                    if(request()->input('jenis_pencarian') == NULL){ 
+                    ?>
+                  <option value='No Pendaftaran'>No Pendaftaran</option>
+                  <option value="No Bukti Penerimaan">No Bukti Penerimaan</option>
+                  <option value="Supplier">Supplier</option>
+                  <option value="Kode Barang">Kode Barang</option>
+                  <option value="Nama Barang">Nama Barang</option>
+                  <?php }else{ ?>
+                  <option selected value='{{ $_GET['jenis_pencarian'] }}'>{{ $_GET['jenis_pencarian'] }}</option>
+                  <option value='No Pendaftaran'>No Bukti Bayar</option>
+                  <option value="No Bukti Penerimaan">No Bukti Penerimaan</option>
+                  <option value="Supplier">Supplier</option>
+                  <option value="Kode Barang">Kode Barang</option>
+                  <option value="Nama Barang">Nama Barang</option>
+                  <?php } ?>
+                </select>
+              </div>
+              <div class="col-md-6 text-end">
+                <label for="searchtext" class="form-label py-2">Search :</label>
+              </div>
+            </div>
+          </div>
             <div class="col-md-2">
               <input type="text" class="form-control" id="searchtext" aria-describedby="searchtext" name="searchtext" placeholder="Search Nomor Pendaftaran...">
             </div>
