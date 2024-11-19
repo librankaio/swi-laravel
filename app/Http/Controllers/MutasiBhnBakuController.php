@@ -68,6 +68,21 @@ class MutasiBhnBakuController extends Controller
 
         return view('print.excel.mutasibhnbaku_report', compact('results', 'datefrForm', 'datetoForm', 'comp_name'));
     }
+    public function exportExcelFull(Request $request)
+    {
+        $dtfr = $request->input('dtfrom');
+        $dtto = $request->input('dtto');
+        $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+        $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+        $comp_code = session()->get('comp_code');
+        $comp_name = session()->get('comp_name');
+
+        $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $comp_code]);
+
+        // dd($results);
+
+        return view('print.excel.mutasibhnbaku_report_full', compact('results', 'datefrForm', 'datetoForm', 'comp_name'));
+    }
 
     public function exportPdf(Request $request)
     {
