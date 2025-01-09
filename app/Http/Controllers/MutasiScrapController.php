@@ -40,10 +40,11 @@ class MutasiScrapController extends Controller
                 $dtfr = $request->input('dtfrom');
                 $dtto = $request->input('dtto');
                 $jenisdok = $request->input('jenisdok');
+                $compcode = session()->get('comp_code');
                 $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                 $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
 
-                $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('tstatus', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('dpnomor', '=', $searchtext)->paginate(10);
+                $results = $results = DB::select('CALL rptmutasiscrap (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
 
                 return view('reports.mutasiscrap', [
                     'results' => $results

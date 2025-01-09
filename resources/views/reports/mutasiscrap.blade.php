@@ -238,9 +238,9 @@
                 @php $total_stock_out = 0; @endphp
                 @foreach($results as $item4)
                     @if($total_stock_out == 0)
-                        @php $total_stock_out = $total_stock_out + $item4->stock_in @endphp
+                        @php $total_stock_out = $total_stock_out + $item4->stock_out @endphp
                     @else
-                        @php $total_stock_out = $total_stock_out + $item4->stock_in @endphp
+                        @php $total_stock_out = $total_stock_out + $item4->stock_out @endphp
                     @endif
                 @endforeach
                   <input type="text" class="form-control" style="height: 30px; width: 150px;" value="{{ number_format($total_stock_out, 2, '.', ',') }}" readonly>
