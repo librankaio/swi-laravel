@@ -46,9 +46,6 @@
                                     <option value="BC 3.0">BC 3.0</option>
                                     <option value="BC 4.1">BC 4.1</option>
                                     <option value="PPFTZ-02">PPFTZ-02</option>
-                                    <option value="BAHAN BAKU">BAHAN BAKU</option>
-                                    <option value="CONSUMABLE">CONSUMABLE</option>
-                                    <option value="PACKAGING">PACKAGING</option>
                                     <?php }else{ ?>
                                     <option selected value='{{ $_GET['jenisdok'] }}'>{{ $_GET['jenisdok'] }}</option>
                                     <option value='All'>All</option>
@@ -57,9 +54,6 @@
                                     <option value="BC 2.7">BC 2.7</option>
                                     <option value="BC 3.0">BC 3.0</option>
                                     <option value="BC 4.1">BC 4.1</option>
-                                    <option value="BAHAN BAKU">BAHAN BAKU</option>
-                                    <option value="CONSUMABLE">CONSUMABLE</option>
-                                    <option value="PACKAGING">PACKAGING</option>
                                     <?php } ?>
                                 </select>
                                 <br>

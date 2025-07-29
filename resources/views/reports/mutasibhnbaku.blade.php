@@ -2,7 +2,7 @@
 @section('content')
     <!-- Form -->
     <form action="/mutasibhnbaku" method="get" class="container-fluid px-5 py-2" id="myform">
-        <div class="head-form">
+        {{-- <div class="head-form">
             <div class="row">
                 <div class="container col-md-4 bg-white px-4 pt-3"
                     style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
@@ -61,10 +61,92 @@
                     </div>
                 </div>
                 <div class="container col-md-4 px-4 py-4" style="border-bottom-right-radius: 10px;">
-                    {{-- <div class="row">
-          <div class="col-md-6">
-          </div>
+                </div>
+                <div class="container col-md-4 px-4 py-4">
+                </div>
+            </div>
         </div> --}}
+        <div class="head-form">
+            <div class="row">
+                <div class="container col-md-8 bg-white px-4 pt-3"
+                    style="border-top-left-radius: 10px; border-top-right-radius: 10px;">
+                    <div class="row">
+                        <div class="col-md-6 bg-white">
+                            <div class="mb-1">
+                                <h5>MUTASI BAHAN BAKU</h5>
+                            </div>
+                        </div>
+                        <div class="col-md-6 bg-white">
+                            <div class="mb-3">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container col-md-4 px-4 py-4"></div>
+            </div>
+            <div class="row">
+                <div class="container col-md-4 bg-white px-4 py-4" style="border-bottom-left-radius: 10px;">
+                    <div class="row">
+                        <div class="col-md-6 bg-white">
+                            <div class="mb-3">
+                                <label for="jenisdokumen" class="form-label">Jenis Dokumen</label>
+                                <select class="form-select" aria-label="Default select example" name="jenisdok">
+                                    <?php 
+                                    if(request()->input('jenisdok') == NULL){ ?>
+                                    <option value="BAHAN BAKU">BAHAN BAKU</option>
+                                    <option value="CONSUMABLE">CONSUMABLE</option>
+                                    <option value="PACKAGING">PACKAGING</option>
+                                    <?php }else{ ?>
+                                    <option selected value='{{ $_GET['jenisdok'] }}'>{{ $_GET['jenisdok'] }}</option>
+                                    <option value="BAHAN BAKU">BAHAN BAKU</option>
+                                    <option value="CONSUMABLE">CONSUMABLE</option>
+                                    <option value="PACKAGING">PACKAGING</option>
+                                    <?php } ?>
+                                </select>
+                                <br>
+                                <button type="submit" class="btn btn-primary px-5" onclick="show_loading()"><span>
+                                        View</span></button>
+                                {{-- <button type="button" class="btn btn-primary"><span> Refresh</span></button> --}}
+                            </div>
+                        </div>
+                        <div class="col-md-6 bg-white">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Tanggal Dari</label>
+                                <div class="input-group date" id="dtfrom">
+                                    <input type="text" class="form-control"
+                                        value="@php if(request()->input('dtfrom')==NULL){ echo date('d/m/Y');} else{ echo $_GET['dtfrom']; } @endphp"
+                                        name="dtfrom">
+                                    <span class="input-group-append">
+                                        <span class="input-group-text bg-white d-block">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container col-md-4 bg-white px-4 py-4" style="border-bottom-right-radius: 10px;">
+                    <div class="row">
+                        <div class="col-md-6 bg-white">
+                            <div class="mb-3">
+                                <label for="exampleInputEmail1" class="form-label">Sampai Tanggal</label>
+                                <div class="input-group date" id="dtto">
+                                    <input type="text" class="form-control"
+                                        value="@php if(request()->input('dtto')==NULL){ echo date('d/m/Y');} else{ echo $_GET['dtto']; } @endphp"
+                                        name="dtto">
+                                    <span class="input-group-append">
+                                        <span class="input-group-text bg-white d-block">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                    </div>
                 </div>
                 <div class="container col-md-4 px-4 py-4">
                 </div>
