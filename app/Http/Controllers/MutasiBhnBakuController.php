@@ -8,6 +8,52 @@ use Illuminate\Support\Facades\DB;
 
 class MutasiBhnBakuController extends Controller
 {
+    // public function index(Request $request)
+    // {
+    //     $dtfr = $request->input('dtfrom');
+    //     $dtto = $request->input('dtto');
+    //     $searchtext = $request->input('searchtext');
+    //     $jenisdok = $request->input('jenisdok');
+
+    //     if ($dtfr) {
+    //         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+    //         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+
+    //         // CASE: Without search text
+    //         if (empty($searchtext)) {
+    //             $compcode = session()->get('comp_code');
+    //             $query = DB::select('CALL rptmutasibahanbaku (?, ?, ?)', [$datefrForm, $datetoForm, $compcode]);
+    //             $data = DB::select('CALL rptmutasibahanbaku (?, ?, ?)', [$datefrForm, $datetoForm, $compcode]);
+
+    //             // $page = $request->input('page', 1);
+    //             // $pageSize = 25;
+    //             // $offset = ($page - 1) * $pageSize;
+    //             // $data = array_slice($query, $offset, $pageSize, true);
+
+    //             return view('reports.mutasibhnbaku', [
+    //                 'results' => $data
+    //             ]);
+    //         }
+
+    //         // CASE: With search text
+    //         $results = DB::table('pemasukan_dokumen')
+    //             ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+    //             ->where('tstatus', 1)
+    //             ->where('jenis_dokumen', $jenisdok)
+    //             ->where('dpnomor', $searchtext)
+    //             ->paginate(10);
+
+    //         return view('reports.mutasibhnbaku', [
+    //             'results' => $results
+    //         ]);
+    //     }
+
+    //     // Default view (no filtering)
+    //     return view('reports.mutasibhnbaku');
+    // }
+
+    
+    //THE ORIGINAL ONE
     public function index(Request $request)
     {
         if (isset($request->dtfrom)) {
