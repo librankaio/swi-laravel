@@ -116,8 +116,8 @@
                                     PDF</span></button>
                             <button type="submit" formaction="exportexcelpengeluaran" class="btn btn-success"><i
                                     class="far fa-file-excel"></i><span> Export Excel</span></button>
-                            <button type="submit" formaction="exportexcelpengeluaranfull" class="btn btn-success"><i
-                                    class="far fa-file-excel"></i><span> Export Excel Detail</span></button>
+                            {{-- <button type="submit" formaction="exportexcelpengeluaranfull" class="btn btn-success"><i
+                                    class="far fa-file-excel"></i><span> Export Excel Detail</span></button> --}}
                             {{-- <button type="button" class="btn btn-primary"><i class="fas fa-print"></i><span> Print</span></button> --}}
                         </div>
                     </div>
