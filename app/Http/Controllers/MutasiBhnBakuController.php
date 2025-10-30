@@ -68,6 +68,7 @@ class MutasiBhnBakuController extends Controller
                 $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
 
                 // $query = DB::select('EXEC rptTest ?,?,?',[$datefrForm,$datetoForm,'BC 4.0']);
+                dd($results);
 
                 $page = request('page', 1);
                 $pageSize = 25;
