@@ -16,8 +16,9 @@ class PemasukkanController extends Controller
     public function index(Request $request)
     {
         // dd($request->all());
+        $jenis_pencarian = $request->input('jenis_pencarian', 'No Pendaftaran');
         if (isset($request->jenisdok)) {
-            if($request->jenis_pencarian == 'No Pendaftaran'){
+            if($jenis_pencarian == 'No Pendaftaran'){
                 if ($request->searchtext == null) {
                     if ($request->jenisdok != "All") {
                         $dtfr = $request->input('dtfrom');
@@ -87,7 +88,7 @@ class PemasukkanController extends Controller
                     }
                 }
             }
-            if($request->jenis_pencarian == 'No Bukti Penerimaan'){
+            if($jenis_pencarian == 'No Bukti Penerimaan'){
                 // dd("Masukkan");
                 if($request->searchtext == null){
                     if ($request->jenisdok != "All") {
@@ -150,7 +151,7 @@ class PemasukkanController extends Controller
                     }
                 }
             }
-            if($request->jenis_pencarian == 'Supplier'){
+            if($jenis_pencarian == 'Supplier'){
                 if($request->searchtext == null){
                     if ($request->jenisdok != "All") {
                         $searchtext = $request->searchtext;
@@ -212,7 +213,7 @@ class PemasukkanController extends Controller
                     }
                 }
             }
-            if($request->jenis_pencarian == 'Kode Barang'){
+            if($jenis_pencarian == 'Kode Barang'){
                 if($request->searchtext == null){
                     if ($request->jenisdok != "All") {
                         $searchtext = $request->searchtext;
@@ -274,7 +275,7 @@ class PemasukkanController extends Controller
                     }
                 }
             }
-            if($request->jenis_pencarian == 'Nama Barang'){
+            if($jenis_pencarian == 'Nama Barang'){
                 if($request->searchtext == null){
                     if ($request->jenisdok != "All") {
                         $searchtext = $request->searchtext;

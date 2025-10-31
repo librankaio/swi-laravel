@@ -17,9 +17,10 @@ class PengeluaranController extends Controller
     //
     public function index(Request $request)
     {
+        $jenis_pencarian = $request->input('jenis_pencarian', 'No Pendaftaran');
         if (isset($request->jenisdok)) {
-            if($request->jenis_pencarian == 'No Pendaftaran'){
-                if ($request->searchtext == null) {
+            if($jenis_pencarian == 'No Pendaftaran'){
+                if ($request->searchtext == null || $request->searchtext == '') {
                     if ($request->jenisdok != "All") {
                         $dtfr = $request->input('dtfrom');
                         $dtto = $request->input('dtto');
@@ -28,7 +29,7 @@ class PengeluaranController extends Controller
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->get();
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dpnomor','asc')->orderBy('dptanggal','asc')->orderBy('bpbnomor','asc')->get();
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -41,7 +42,7 @@ class PengeluaranController extends Controller
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dpnomor','asc')->orderBy('dptanggal','asc')->orderBy('bpbnomor','asc')->get();
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -79,8 +80,8 @@ class PengeluaranController extends Controller
                     }
                 }
             }
-            if($request->jenis_pencarian == 'No Bukti Penerimaan'){
-                if ($request->searchtext == null) {
+            if($jenis_pencarian == 'No Bukti Penerimaan'){
+                if ($request->searchtext == null || $request->searchtext == '') {
                     if ($request->jenisdok != "All") {
                         $dtfr = $request->input('dtfrom');
                         $dtto = $request->input('dtto');
@@ -140,8 +141,8 @@ class PengeluaranController extends Controller
                     }
                 }
             }
-            if($request->jenis_pencarian == 'Supplier'){
-                if ($request->searchtext == null) {
+            if($jenis_pencarian == 'Supplier'){
+                if ($request->searchtext == null || $request->searchtext == '') {
                     if ($request->jenisdok != "All") {
                         $dtfr = $request->input('dtfrom');
                         $dtto = $request->input('dtto');
@@ -201,8 +202,8 @@ class PengeluaranController extends Controller
                     }
                 }
             }
-            if($request->jenis_pencarian == 'Kode Barang'){
-                if ($request->searchtext == null) {
+            if($jenis_pencarian == 'Kode Barang'){
+                if ($request->searchtext == null || $request->searchtext == '') {
                     if ($request->jenisdok != "All") {
                         $dtfr = $request->input('dtfrom');
                         $dtto = $request->input('dtto');
@@ -262,8 +263,8 @@ class PengeluaranController extends Controller
                     }
                 }
             }
-            if($request->jenis_pencarian == 'Nama Barang'){
-                if ($request->searchtext == null) {
+            if($jenis_pencarian == 'Nama Barang'){
+                if ($request->searchtext == null || $request->searchtext == '') {
                     if ($request->jenisdok != "All") {
                         $dtfr = $request->input('dtfrom');
                         $dtto = $request->input('dtto');
@@ -439,7 +440,7 @@ class PengeluaranController extends Controller
             $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
             $comp_name = session()->get('comp_name');
 
-            $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+            $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dpnomor','asc')->orderBy('dptanggal','asc')->orderBy('bpbnomor','asc')->get();
 
             // $results = DB::select('EXEC rptTest ?,?,?',[$datefrForm,$datetoForm,$jenisdok]);
 
@@ -449,10 +450,10 @@ class PengeluaranController extends Controller
             $dtto = $request->input('dtto');
             $jenisdok = $request->input('jenisdok');
             $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
-            $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');            
+            $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
             $comp_name = session()->get('comp_name');
 
-            $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+            $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dpnomor','asc')->orderBy('dptanggal','asc')->orderBy('bpbnomor','asc')->get();
 
             // dd($results);
         }
