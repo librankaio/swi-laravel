@@ -121,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="nav-table py-2 px-1">
+                {{-- <div class="nav-table py-2 px-1">
                     <div class="row d-flex">
                         <div class="col-md-4"></div>
                         <div class="col-md-3">
@@ -155,6 +155,24 @@
                                         <?php } ?>
                                     </select>
                                 </div>
+                                <div class="col-md-6 text-end">
+                                    <label for="searchtext" class="form-label py-2">Search :</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="searchtext" aria-describedby="searchtext"
+                                name="searchtext" placeholder="Search Nomor Pendaftaran...">
+                        </div>
+                    </div>
+                </div> --}}
+                <div class="nav-table py-2 px-1">
+                    <div class="row d-flex">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-6"></div>
                                 <div class="col-md-6 text-end">
                                     <label for="searchtext" class="form-label py-2">Search :</label>
                                 </div>
