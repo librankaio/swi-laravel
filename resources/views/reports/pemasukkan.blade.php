@@ -229,7 +229,7 @@
                                 @if ($no == 0)
                                     @foreach ($results as $key => $item)
                                         <tr>
-                                            @if ($item->dpnomor == $dpnomor)
+                                            @if (trim($item->dpnomor) == trim($dpnomor))
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
@@ -237,7 +237,7 @@
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
-                                            @elseif($item->dpnomor == $dpnomor && $item->bpbnomor != $bpbnomor)
+                                            @elseif(trim($item->dpnomor) == $dpnomor && trim($item->bpbnomor) != $bpbnomor)
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
@@ -282,10 +282,8 @@
                                             @endif
                                         </tr>
                                         @php
-                                            // $dpnomor = $item->dpnomor;
-                                            $dpnomor = preg_replace('/\s+/u', '', $item->dpnomor);
-                                            // $bpbnomor = $item->bpbnomor;
-                                            $bpbnomor = preg_replace('/\s+/u', '', $item->dpnomor);
+                                            $dpnomor = $item->dpnomor;
+                                            $bpbnomor = $item->bpbnomor;
                                         @endphp
                                     @endforeach
                                 @elseif(count($results) == 0)

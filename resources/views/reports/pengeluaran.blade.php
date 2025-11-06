@@ -210,7 +210,7 @@
                                 @if ($no == 0)
                                     @foreach ($results as $key => $item)
                                         <tr>
-                                            @if ($item->dpnomor == $dpnomor && $item->bpbnomor == $bpbnomor)
+                                            @if (trim($item->dpnomor) == trim($dpnomor) && trim($item->bpbnomor) == trim($bpbnomor))
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
@@ -218,7 +218,7 @@
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
-                                            @elseif($item->dpnomor == $dpnomor && $item->bpbnomor != $bpbnomor)
+                                            @elseif (trim($item->dpnomor) == trim($dpnomor) && trim($item->bpbnomor) != trim($bpbnomor))
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
                                                 <td class="border-2"></td>
