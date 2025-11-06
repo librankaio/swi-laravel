@@ -297,7 +297,7 @@ class PemasukkanController extends Controller
                         $jenisdok = $request->input('jenisdok');
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
-                        dd($request->searchtext);
+                        // dd($request->searchtext);
                         // $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('tstatus', '=', 1)->where('dpnomor', '=', $searchtext)->paginate(10);
                         $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('nama_barang','desc')->get();
                         return view('reports.pemasukkan', [

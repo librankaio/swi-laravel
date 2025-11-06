@@ -23,7 +23,6 @@ class RegisterController extends Controller
             'password' => ['required', 'min:8'],
             'confpassword' => ['min:8'],
         ]);
-        dd($request);
         User::create([
             'username' => $request->username,
             'email' => $request->email,
