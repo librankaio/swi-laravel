@@ -203,7 +203,8 @@
                             @php
                                 $no = 0;
                                 $dpnomor = '';
-                            $bpbnomor = ''; @endphp
+                                $bpbnomor = '';
+                            @endphp
                             @isset($results)
                                 {{-- @if (count($results) > 0) --}}
                                 @if ($no == 0)
