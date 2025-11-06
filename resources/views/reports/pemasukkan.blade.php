@@ -282,8 +282,10 @@
                                             @endif
                                         </tr>
                                         @php
-                                            $dpnomor = $item->dpnomor;
-                                            $bpbnomor = $item->bpbnomor;
+                                            // $dpnomor = $item->dpnomor;
+                                            $dpnomor = preg_replace('/\s+/u', '', $item->dpnomor);
+                                            // $bpbnomor = $item->bpbnomor;
+                                            $bpbnomor = preg_replace('/\s+/u', '', $item->dpnomor);
                                         @endphp
                                     @endforeach
                                 @elseif(count($results) == 0)
