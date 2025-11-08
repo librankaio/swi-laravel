@@ -135,7 +135,7 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
             'F' => 12,  // Tanggal Pengeluaran
             'G' => 25,  // Customer
             'H' => 15,  // Kode Barang
-            'I' => 30,  // Nama Barang
+            'I' => 50,  // Nama Barang
             'J' => 8,   // Satuan
             'K' => 12,  // Jumlah
             'L' => 18,  // Nilai Rp
@@ -185,6 +185,9 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
         for ($row = $tableHeader2 + 1; $row <= $highestRow; $row++) {
             $sheet->getStyle("A{$row}:M{$row}")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
             $sheet->getStyle("A{$row}:M{$row}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            // Enable text wrapping for Customer column (G) and Nama Barang column (I)
+            $sheet->getStyle("G{$row}")->getAlignment()->setWrapText(true);
+            $sheet->getStyle("I{$row}")->getAlignment()->setWrapText(true);
         }
 
         // Style footer
