@@ -483,4 +483,29 @@ class PengeluaranController extends Controller
         }
         return view('print.pdf.pengeluaran_report', compact('results', 'datefrForm', 'datetoForm'));
     }
+
+    public function exportExcel2(Request $request)
+    {
+        if ($request->jenisdok != "All") {
+            $dtfr = $request->input('dtfrom');
+            $dtto = $request->input('dtto');
+            $jenisdok = $request->input('jenisdok');
+            $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+            $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+            $comp_name = session()->get('comp_name');
+
+            $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+        } else if ($request->jenisdok == "All") {
+            $dtfr = $request->input('dtfrom');
+            $dtto = $request->input('dtto');
+            $jenisdok = $request->input('jenisdok');
+            $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+            $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+            $comp_name = session()->get('comp_name');
+
+            $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+        }
+
+        return Excel::download(new PengeluaranExport($results, $datefrForm, $datetoForm, $comp_name), 'Laporan_PengeluaranDokumen.xlsx');
+    }
 }

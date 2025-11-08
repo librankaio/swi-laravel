@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PemasukkanExport;
 use App\Models\Pemasukkan;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PDF;
@@ -510,5 +512,30 @@ class PemasukkanController extends Controller
             // }
         }
         return view('print.pdf.pemasukkan_report', compact('results', 'datefrForm', 'datetoForm'));
+    }
+
+    public function exportExcel2(Request $request)
+    {
+        if ($request->jenisdok != "All") {
+            $dtfr = $request->input('dtfrom');
+            $dtto = $request->input('dtto');
+            $jenisdok = $request->input('jenisdok');
+            $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+            $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+            $comp_name = session()->get('comp_name');
+
+            $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dpnomor','asc')->orderBy('dptanggal','asc')->orderBy('bpbnomor','asc')->get();
+        } else if ($request->jenisdok == "All") {
+            $dtfr = $request->input('dtfrom');
+            $dtto = $request->input('dtto');
+            $jenisdok = $request->input('jenisdok');
+            $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+            $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+            $comp_name = session()->get('comp_name');
+
+            $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dpnomor','asc')->orderBy('dptanggal','asc')->orderBy('bpbnomor','asc')->get();
+        }
+
+        return Excel::download(new PemasukkanExport($results, $datefrForm, $datetoForm, $comp_name), 'Laporan_PemasukanDokumen.xlsx');
     }
 }

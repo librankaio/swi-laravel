@@ -15,7 +15,7 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles, WithColumnWidths, WithColumnFormatting
+class PemasukkanExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles, WithColumnWidths, WithColumnFormatting
 {
     protected $results;
     protected $datefrForm;
@@ -35,7 +35,7 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
         $data = collect();
 
         // Add title rows
-        $data->push(['LAPORAN PERTANGGUNG JAWABAN PENGELUARAN DOKUMEN', '', '', '', '', '', '', '', '', '', '', '', '']);
+        $data->push(['LAPORAN PERTANGGUNG JAWABAN PEMASUKAN DOKUMEN', '', '', '', '', '', '', '', '', '', '', '', '']);
         $data->push([$this->comp_name, '', '', '', '', '', '', '', '', '', '', '', '']);
 
         if ($this->datefrForm && $this->datetoForm) {
@@ -48,7 +48,7 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
 
         // Header row 1 (with colspans)
         $data->push([
-            'No', 'Jenis Dokumen', 'Dokumen Pabean', '', 'Pengeluaran Barang', '', 'Customer',
+            'No', 'Jenis Dokumen', 'Dokumen Pabean', '', 'Bukti Penerimaan Barang', '', 'Supplier',
             'Kode Barang', 'Nama Barang', 'Satuan', 'Jumlah', 'Nilai Barang', ''
         ]);
 
@@ -64,7 +64,7 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
             $bpbnomor = '';
 
             foreach ($this->results as $item) {
-                if (trim($item->dpnomor) == trim($dpnomor) && trim($item->bpbnomor) == trim($bpbnomor)) {
+                if ($item->dpnomor == $dpnomor) {
                     // For merged rows, empty first 7 columns
                     $data->push([
                         '', '', '', '', '', '', '',
@@ -75,7 +75,7 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
                         $item->nilai_barang == 0 ? '--' : (float)$item->nilai_barang,
                         $item->nilai_barang_usd == 0 ? '--' : (float)$item->nilai_barang_usd
                     ]);
-                } elseif (trim($item->dpnomor) == trim($dpnomor) && trim($item->bpbnomor) != trim($bpbnomor)) {
+                } elseif ($item->dpnomor == $dpnomor && $item->bpbnomor != $bpbnomor) {
                     // Special case for different bpbnomor but same dpnomor
                     $data->push([
                         '', '', '', '', $item->bpbnomor, date('d/m/Y', strtotime($item->bpbtanggal)), $item->pembeli_penerima,
@@ -99,7 +99,7 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
                         date('d/m/Y', strtotime($item->dptanggal)),
                         $item->bpbnomor,
                         date('d/m/Y', strtotime($item->bpbtanggal)),
-                        $item->pembeli_penerima,
+                        $item->pemasok_pengirim,
                         $item->kode_barang,
                         $item->nama_barang,
                         $item->sat,
@@ -131,9 +131,9 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
             'B' => 15,  // Jenis Dokumen
             'C' => 20,  // Nomor Pendaftaran
             'D' => 12,  // Tanggal Dokumen
-            'E' => 20,  // Nomor Pengeluaran
-            'F' => 12,  // Tanggal Pengeluaran
-            'G' => 25,  // Customer
+            'E' => 20,  // Nomor Bukti
+            'F' => 12,  // Tanggal Bukti
+            'G' => 25,  // Supplier
             'H' => 15,  // Kode Barang
             'I' => 30,  // Nama Barang
             'J' => 8,   // Satuan
@@ -170,7 +170,7 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
 
         // Merge header cells to match colspan
         $sheet->mergeCells("C{$tableHeader1}:D{$tableHeader1}"); // Dokumen Pabean
-        $sheet->mergeCells("E{$tableHeader1}:F{$tableHeader1}"); // Pengeluaran Barang
+        $sheet->mergeCells("E{$tableHeader1}:F{$tableHeader1}"); // Bukti Penerimaan Barang
         $sheet->mergeCells("L{$tableHeader1}:M{$tableHeader1}"); // Nilai Barang
 
         // Style table headers with background color

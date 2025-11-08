@@ -114,7 +114,9 @@
                             <button type="submit" formaction="exportpdfpengeluaran" formtarget="_blank"
                                 class="btn btn-danger"><i class="fa-regular fa-file-pdf"></i><span> Export
                                     PDF</span></button>
-                            <button type="submit" formaction="exportexcelpengeluaran" class="btn btn-success"><i
+                            {{-- <button type="submit" formaction="exportexcelpengeluaran" class="btn btn-success"><i
+                                    class="far fa-file-excel"></i><span> Export Excel</span></button> --}}
+                            <button type="submit" formaction="exportexcelpengeluaran2" class="btn btn-success"><i
                                     class="far fa-file-excel"></i><span> Export Excel</span></button>
                             <button type="submit" formaction="exportexcelpengeluaranfull" class="btn btn-success"><i
                                     class="far fa-file-excel"></i><span> Export Excel Detail</span></button>
