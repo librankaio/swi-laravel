@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MutasiWinProcessExport;
 
 class MutasiWinProcessController extends Controller
 {
@@ -83,5 +85,19 @@ class MutasiWinProcessController extends Controller
         // dd($results);
 
         return view('print.pdf.mutasiwinprocess_report', compact('results', 'datefrForm', 'datetoForm', 'compcode','comp_name'));
+    }
+
+    public function exportExcelDownload(Request $request)
+    {
+        $dtfr = $request->input('dtfrom');
+        $dtto = $request->input('dtto');
+        $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+        $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+        $comp_code = session()->get('comp_code');
+        $comp_name = session()->get('comp_name');
+
+        $results = DB::select('CALL rptmutasiwip (?,?,?)', [$datefrForm, $datetoForm, $comp_code]);
+
+        return Excel::download(new MutasiWinProcessExport($results, $datefrForm, $datetoForm, $comp_name), 'mutasi_work_in_process.xlsx');
     }
 }

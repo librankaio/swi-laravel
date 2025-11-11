@@ -162,7 +162,7 @@
                             <button type="submit" formaction="exportpdfbhnbaku" formtarget="_blank"
                                 class="btn btn-danger"><i class="fa-regular fa-file-pdf"></i><span> Export
                                     PDF</span></button>
-                            <button type="submit" formaction="exportexcelbhnbaku" class="btn btn-success"><i
+                            <button type="submit" formaction="exportexcelbhnbakudownload" class="btn btn-success"><i
                                     class="far fa-file-excel"></i><span> Export Excel</span></button>
                             {{-- <button type="submit" formaction="exportexcelbhnbakufull" class="btn btn-success"><i
                 class="far fa-file-excel"></i><span> Export Excel(Detail)</span></button> --}}

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\MutasiLogHistExport;
 
 class MutasiLogHistController extends Controller
 {
@@ -45,7 +47,19 @@ class MutasiLogHistController extends Controller
         $comp_name = session()->get('comp_name');
 
         $results = DB::select("SELECT * FROM userlog WHERE comp_code = '$comp_code' and DATE(datein) >= '".$datefrForm."' and DATE(datein) <= '".$datetoForm."'");
-        
+
         return view('print.pdf.mutasiloghist_report', compact('results', 'datefrForm', 'datetoForm', 'comp_name'));
+    }
+
+    public function exportExcelDownload(Request $request)
+    {
+        $datefrForm = date("Y-m-d",strtotime(str_replace('/', '-',$request->dtfrom)));
+        $datetoForm = date("Y-m-d",strtotime(str_replace('/', '-',$request->dtto)));
+        $comp_code = session()->get('comp_code');
+        $comp_name = session()->get('comp_name');
+
+        $results = DB::select("SELECT * FROM userlog WHERE comp_code = '$comp_code' and DATE(datein) >= '".$datefrForm."' and DATE(datein) <= '".$datetoForm."'");
+
+        return Excel::download(new MutasiLogHistExport($results, $datefrForm, $datetoForm, $comp_name), 'mutasi_log_history.xlsx');
     }
 }
