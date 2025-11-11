@@ -116,30 +116,23 @@
                                     class="far fa-file-excel"></i><span> Export Excel</span></button> --}}
                             <button type="submit" formaction="exportexcelpemasukan2" class="btn btn-success"><i
                                     class="far fa-file-excel"></i><span> Export Excel</span></button>
-                            <button type="submit" formaction="exportexcelpemasukanfull" class="btn btn-success"><i
-                                    class="far fa-file-excel"></i><span> Export Excel(Detail)</span></button>
+                            {{-- <button type="submit" formaction="exportexcelpemasukanfull" class="btn btn-success"><i
+                                    class="far fa-file-excel"></i><span> Export Excel(Detail)</span></button> --}}
                             {{-- <button type="button" class="btn btn-primary"><i class="fas fa-print"></i><span> Print</span></button>
             --}}
                         </div>
                     </div>
                 </div>
                 <div class="nav-table py-2 px-1">
-                    <div class="row d-flex">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-3">
+                    <div class="row d-flex align-items-end">
+                        <div class="col-md-8"></div>
+                        <div class="col-md-4">
                             <div class="row">
-                                <div class="col-md-9"></div>
-                                <div class="col-md-3">
-                                    <label for="searchtext" class="form-label py-2">Search Type :</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <label for="jenis_pencarian" class="form-label fw-bold">Search Type:</label>
                                     <select class="form-select" aria-label="Default select example"
                                         name="jenis_pencarian">
-                                        <?php 
+                                        <?php
                                         if(request()->input('jenis_pencarian') == NULL){ ?>
                                         <option value='No Pendaftaran'>No Pendaftaran</option>
                                         <option value="No Bukti Penerimaan">No Bukti Penerimaan</option>
@@ -157,14 +150,13 @@
                                         <?php } ?>
                                     </select>
                                 </div>
-                                <div class="col-md-6 text-end">
-                                    <label for="searchtext" class="form-label py-2">Search :</label>
+                                <div class="col-md-8">
+                                    <label for="searchtext" class="form-label fw-bold">Search:</label>
+                                    <input type="text" class="form-control" id="searchtext"
+                                        aria-describedby="searchtext" name="searchtext"
+                                        placeholder="Enter search term...">
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <input type="text" class="form-control" id="searchtext" aria-describedby="searchtext"
-                                name="searchtext" placeholder="Search Nomor Pendaftaran...">
                         </div>
                     </div>
                 </div>
