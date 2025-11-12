@@ -63,17 +63,34 @@ class MutasiBhnBakuController extends Controller
 
                 $dtfr = $request->input('dtfrom');
                 $dtto = $request->input('dtto');
+                $jenisdok = $request->input('jenisdok', 'A');
                 $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                 $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
                 $compcode = session()->get('comp_code');
 
-                $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
+                switch ($jenisdok) {
+                    case 'A':
+                        $itemtp = 'A';
+                        break;
+                    case 'B':
+                        $itemtp = 'B';
+                        break;
+                    case 'C':
+                        $itemtp = 'C';
+                        break;
+                    case 'P':
+                        $itemtp = 'P';
+                        break;
+                    default:
+                        $itemtp = 'A';
+                }
+                $results = DB::select('CALL rptmutasibahanbaku (?,?,?,?)', [$datefrForm, $datetoForm, $compcode, $itemtp]);
 
                 // $query = DB::select('EXEC rptTest ?,?,?',[$datefrForm,$datetoForm,'BC 4.0']);
 
                 $page = request('page', 1);
                 $pageSize = 25;
-                $query = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
+                $query = DB::select('CALL rptmutasibahanbaku (?,?,?,?)', [$datefrForm, $datetoForm, $compcode, $itemtp]);
                 $offset = ($page * $pageSize) - $pageSize;
                 $data = array_slice($query, $offset, $pageSize, true);
                 // $results = new \Illuminate\Pagination\LengthAwarePaginator($data, count($data), $pageSize, $page);
@@ -105,12 +122,30 @@ class MutasiBhnBakuController extends Controller
     {
         $dtfr = $request->input('dtfrom');
         $dtto = $request->input('dtto');
+        $jenisdok = $request->input('jenisdok', 'A');
         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
         $comp_code = session()->get('comp_code');
         $comp_name = session()->get('comp_name');
 
-        $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $comp_code]);
+        switch ($jenisdok) {
+            case 'A':
+                $itemtp = 'A';
+                break;
+            case 'B':
+                $itemtp = 'B';
+                break;
+            case 'C':
+                $itemtp = 'C';
+                break;
+            case 'P':
+                $itemtp = 'P';
+                break;
+            default:
+                $itemtp = 'A';
+        }
+
+        $results = DB::select('CALL rptmutasibahanbaku (?,?,?,?)', [$datefrForm, $datetoForm, $comp_code, $itemtp]);
 
         // dd($results);
 
@@ -120,12 +155,30 @@ class MutasiBhnBakuController extends Controller
     {
         $dtfr = $request->input('dtfrom');
         $dtto = $request->input('dtto');
+        $jenisdok = $request->input('jenisdok', 'A');
         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
         $comp_code = session()->get('comp_code');
         $comp_name = session()->get('comp_name');
 
-        $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $comp_code]);
+        switch ($jenisdok) {
+            case 'A':
+                $itemtp = 'A';
+                break;
+            case 'B':
+                $itemtp = 'B';
+                break;
+            case 'C':
+                $itemtp = 'C';
+                break;
+            case 'P':
+                $itemtp = 'P';
+                break;
+            default:
+                $itemtp = 'A';
+        }
+
+        $results = DB::select('CALL rptmutasibahanbaku (?,?,?,?)', [$datefrForm, $datetoForm, $comp_code, $itemtp]);
 
         // dd($results);
 
@@ -136,11 +189,29 @@ class MutasiBhnBakuController extends Controller
     {
         $dtfr = $request->input('dtfrom');
         $dtto = $request->input('dtto');
+        $jenisdok = $request->input('jenisdok', 'A');
         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
         $compcode = session()->get('comp_code');
 
-        $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
+        switch ($jenisdok) {
+            case 'A':
+                $itemtp = 'A';
+                break;
+            case 'B':
+                $itemtp = 'B';
+                break;
+            case 'C':
+                $itemtp = 'C';
+                break;
+            case 'P':
+                $itemtp = 'P';
+                break;
+            default:
+                $itemtp = 'A';
+        }
+
+        $results = DB::select('CALL rptmutasibahanbaku (?,?,?,?)', [$datefrForm, $datetoForm, $compcode, $itemtp]);
 
         // dd($results);
 
@@ -151,12 +222,30 @@ class MutasiBhnBakuController extends Controller
     {
         $dtfr = $request->input('dtfrom');
         $dtto = $request->input('dtto');
+        $jenisdok = $request->input('jenisdok', 'A');
         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
         $comp_code = session()->get('comp_code');
         $comp_name = session()->get('comp_name');
 
-        $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $comp_code]);
+        switch ($jenisdok) {
+            case 'A':
+                $itemtp = 'A';
+                break;
+            case 'B':
+                $itemtp = 'B';
+                break;
+            case 'C':
+                $itemtp = 'C';
+                break;
+            case 'P':
+                $itemtp = 'P';
+                break;
+            default:
+                $itemtp = 'A';
+        }
+
+        $results = DB::select('CALL rptmutasibahanbaku (?,?,?,?)', [$datefrForm, $datetoForm, $comp_code, $itemtp]);
 
         return Excel::download(new MutasiBhnBakuExport($results, $datefrForm, $datetoForm, $comp_name), 'mutasi_bahan_baku.xlsx');
     }
