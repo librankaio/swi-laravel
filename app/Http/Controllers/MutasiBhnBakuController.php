@@ -70,7 +70,7 @@ class MutasiBhnBakuController extends Controller
 
                 switch ($jenisdok) {
                     case 'A':
-                        $itemtp = 'A';
+                        $itemtp = NULL;
                         break;
                     case 'B':
                         $itemtp = 'B';
@@ -82,8 +82,9 @@ class MutasiBhnBakuController extends Controller
                         $itemtp = 'P';
                         break;
                     default:
-                        $itemtp = 'A';
+                        $itemtp = NULL;
                 }
+                $results = DB::select('CALL rptmutasibahanbaku (?,?,?,?)', [$datefrForm, $datetoForm, $compcode, $itemtp]);
 
                 if($jenisdok == 'A'){
                     $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
