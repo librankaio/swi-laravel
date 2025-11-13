@@ -86,12 +86,6 @@ class MutasiBhnBakuController extends Controller
                 }
                 $results = DB::select('CALL rptmutasibahanbaku (?,?,?,?)', [$datefrForm, $datetoForm, $compcode, $itemtp]);
 
-                if($jenisdok == 'A'){
-                    $results = DB::select('CALL rptmutasibahanbaku (?,?,?)', [$datefrForm, $datetoForm, $compcode]);
-                }else{
-                    $results = DB::select('CALL rptmutasibahanbaku (?,?,?,?)', [$datefrForm, $datetoForm, $compcode, $itemtp]);
-                }
-
                 // $query = DB::select('EXEC rptTest ?,?,?',[$datefrForm,$datetoForm,'BC 4.0']);
 
                 $page = request('page', 1);
