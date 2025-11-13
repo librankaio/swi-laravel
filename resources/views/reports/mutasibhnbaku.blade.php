@@ -94,16 +94,16 @@
                                 <select class="form-select" aria-label="Default select example" name="jenisdok">
                                     <?php 
                                     if(request()->input('jenisdok') == NULL){ ?>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="P">P</option>
+                                    <option value="A">ALL</option>
+                                    <option value="B">BAHAN BAKU</option>
+                                    <option value="C">CONSUMABLE </option>
+                                    <option value="P">PACKAGING</option>
                                     <?php }else{ ?>
                                     <option selected value='{{ $_GET['jenisdok'] }}'>{{ $_GET['jenisdok'] }}</option>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="P">P</option>
+                                    <option value="A">ALL</option>
+                                    <option value="B">BAHAN BAKU</option>
+                                    <option value="C">CONSUMABLE </option>
+                                    <option value="P">PACKAGING</option>
                                     <?php } ?>
                                 </select>
                                 <br>
