@@ -92,19 +92,13 @@
                             <div class="mb-3">
                                 <label for="jenisdokumen" class="form-label">Jenis Dokumen</label>
                                 <select class="form-select" aria-label="Default select example" name="jenisdok">
-                                    <?php 
-                                    if(request()->input('jenisdok') == NULL){ ?>
-                                    <option value="A">ALL</option>
-                                    <option value="B">BAHAN BAKU</option>
-                                    <option value="C">CONSUMABLE </option>
-                                    <option value="P">PACKAGING</option>
-                                    <?php }else{ ?>
-                                    <option selected value='{{ $_GET['jenisdok'] }}'>{{ $_GET['jenisdok'] }}</option>
-                                    <option value="A">ALL</option>
-                                    <option value="B">BAHAN BAKU</option>
-                                    <option value="C">CONSUMABLE </option>
-                                    <option value="P">PACKAGING</option>
-                                    <?php } ?>
+                                    <option value="A" @if (request()->input('jenisdok') == 'A' || request()->input('jenisdok') == null) selected @endif>ALL</option>
+                                    <option value="B" @if (request()->input('jenisdok') == 'B') selected @endif>BAHAN BAKU
+                                    </option>
+                                    <option value="C" @if (request()->input('jenisdok') == 'C') selected @endif>CONSUMABLE
+                                    </option>
+                                    <option value="P" @if (request()->input('jenisdok') == 'P') selected @endif>PACKAGING
+                                    </option>
                                 </select>
                                 <br>
                                 <button type="submit" class="btn btn-primary px-5" onclick="show_loading()"><span>
