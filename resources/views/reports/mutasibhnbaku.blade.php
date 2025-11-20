@@ -90,24 +90,6 @@
                     <div class="row">
                         <div class="col-md-6 bg-white">
                             <div class="mb-3">
-                                <label for="jenisdokumen" class="form-label">Jenis Dokumen</label>
-                                <select class="form-select" aria-label="Default select example" name="jenisdok">
-                                    <option value="A" @if (request()->input('jenisdok') == 'A' || request()->input('jenisdok') == null) selected @endif>ALL</option>
-                                    <option value="B" @if (request()->input('jenisdok') == 'B') selected @endif>BAHAN BAKU
-                                    </option>
-                                    <option value="C" @if (request()->input('jenisdok') == 'C') selected @endif>CONSUMABLE
-                                    </option>
-                                    <option value="P" @if (request()->input('jenisdok') == 'P') selected @endif>PACKAGING
-                                    </option>
-                                </select>
-                                <br>
-                                <button type="submit" class="btn btn-primary px-5" onclick="show_loading()"><span>
-                                        View</span></button>
-                                {{-- <button type="button" class="btn btn-primary"><span> Refresh</span></button> --}}
-                            </div>
-                        </div>
-                        <div class="col-md-6 bg-white">
-                            <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Tanggal Dari</label>
                                 <div class="input-group date" id="dtfrom">
                                     <input type="text" class="form-control"
@@ -119,12 +101,12 @@
                                         </span>
                                     </span>
                                 </div>
+                                <br>
+                                <br>
+                                <button type="submit" class="btn btn-primary px-5" onclick="show_loading()"><span>
+                                        View</span></button>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="container col-md-4 bg-white px-4 py-4" style="border-bottom-right-radius: 10px;">
-                    <div class="row">
                         <div class="col-md-6 bg-white">
                             <div class="mb-3">
                                 <label for="exampleInputEmail1" class="form-label">Sampai Tanggal</label>
@@ -138,6 +120,28 @@
                                         </span>
                                     </span>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container col-md-4 bg-white px-4 py-4" style="border-bottom-right-radius: 10px;">
+                    <div class="row">
+                        <div class="col-md-6 bg-white" hidden>
+                            <div class="mb-3">
+                                <label for="jenisdokumen" class="form-label">Jenis Dokumen</label>
+                                <select class="form-select" aria-label="Default select example" name="jenisdok">
+                                    <option value="A" @if (request()->input('jenisdok') == 'A' || request()->input('jenisdok') == null) selected @endif>ALL</option>
+                                    <option value="B" @if (request()->input('jenisdok') == 'B') selected @endif>BAHAN BAKU
+                                    </option>
+                                    <option value="C" @if (request()->input('jenisdok') == 'C') selected @endif>CONSUMABLE
+                                    </option>
+                                    <option value="P" @if (request()->input('jenisdok') == 'P') selected @endif>PACKAGING
+                                    </option>
+                                </select>
+                                <br>
+                                {{-- <button type="submit" class="btn btn-primary px-5" onclick="show_loading()"><span>
+                                        View</span></button> --}}
+                                {{-- <button type="button" class="btn btn-primary"><span> Refresh</span></button> --}}
                             </div>
                         </div>
                         <div class="col-md-6">
