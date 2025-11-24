@@ -126,7 +126,7 @@
                 </div>
                 <div class="container col-md-4 bg-white px-4 py-4" style="border-bottom-right-radius: 10px;">
                     <div class="row">
-                        <div class="col-md-6 bg-white" hidden>
+                        {{-- <div class="col-md-6 bg-white" hidden>
                             <div class="mb-3">
                                 <label for="jenisdokumen" class="form-label">Jenis Dokumen</label>
                                 <select class="form-select" aria-label="Default select example" name="jenisdok">
@@ -139,11 +139,8 @@
                                     </option>
                                 </select>
                                 <br>
-                                {{-- <button type="submit" class="btn btn-primary px-5" onclick="show_loading()"><span>
-                                        View</span></button> --}}
-                                {{-- <button type="button" class="btn btn-primary"><span> Refresh</span></button> --}}
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-6">
                         </div>
                     </div>
