@@ -27,8 +27,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->get();
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -40,8 +40,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -56,8 +56,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->where('dpnomor','=',$searchtext)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('dpnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('dpnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('dpnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -70,8 +70,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('dpnomor','=',$searchtext)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('dpnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('dpnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('dpnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -88,8 +88,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->get();
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -101,8 +101,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -116,9 +116,9 @@ class PengeluaranController extends Controller
                         $jenisdok = $request->input('jenisdok');
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
-    
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->where('dpnomor','=',$searchtext)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('bpbnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('bpbnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('bpbnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -131,8 +131,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('bpbnomor','=',$searchtext)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('bpbnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('bpbnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('bpbnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -149,8 +149,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->get();
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -162,8 +162,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -178,8 +178,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->where('dpnomor','=',$searchtext)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pemasok_pengirim','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pemasok_pengirim','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pemasok_pengirim','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -192,8 +192,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('bpbnomor','=',$searchtext)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pemasok_pengirim','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pemasok_pengirim','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pemasok_pengirim','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -210,8 +210,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->get();
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -223,8 +223,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -239,8 +239,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->where('dpnomor','=',$searchtext)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -253,8 +253,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('bpbnomor','=',$searchtext)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -271,8 +271,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->get();
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -284,8 +284,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -300,8 +300,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('jenis_dokumen','=',$jenisdok)->where('dpnomor','=',$searchtext)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results
@@ -314,8 +314,8 @@ class PengeluaranController extends Controller
                         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
-                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal',[$datefrForm,$datetoForm])->where('tstatus','=',1)->where('bpbnomor','=',$searchtext)->paginate(10);
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
+                        // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->paginate(100);
     
                         return view('reports.pengeluaran', [
                             'results' => $results

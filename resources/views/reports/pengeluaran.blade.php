@@ -369,17 +369,22 @@
                     </div>
                     {{-- END RESPONSIVE TABLE IN XL --}}
                     <div class="row">
-                        {{-- <div class="col-md-6 py-3">
-            <div class="d-flex justify-content-start">
-              Showing
-              {{ $results->firstItem() }}
-              to
-              {{ $results->lastItem() }}
-              of
-              {{ $results->total() }}
-              Entries
-            </div>
-          </div> --}}
+                        <div class="col-md-6 py-3">
+                            <div class="d-flex justify-content-start">
+                                Showing
+                                {{ $results->firstItem() }}
+                                to
+                                {{ $results->lastItem() }}
+                                of
+                                {{ $results->total() }}
+                                Entries
+                            </div>
+                        </div>
+                        <div class="col-md-12 pt-3">
+                            <div class="d-flex justify-content-end">
+                                {{ $results->appends(request()->input())->links() }}
+                            </div>
+                        </div>
                         <div class="col-md-12 pt-3">
                             <div class="d-flex justify-content-end">
                                 <div class="px-2 pt-1">
@@ -418,14 +423,13 @@
                                             value="0" readonly>
                                     @endif
                                 </div>
-                                {{-- {{ $results->appends(request()->input())->links() }} --}}
                             </div>
                         </div>
                         {{-- <div class="col-md-6">
-            <div class="d-flex justify-content-end">
-              {{ $results->appends(request()->input())->links() }}
-            </div>
-          </div> --}}
+                            <div class="d-flex justify-content-end">
+                            {{ $results->appends(request()->input())->links() }}
+                            </div>
+                        </div> --}}
                     @endisset
                 </div>
             </div>
@@ -434,12 +438,16 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#datatable_xl').dataTable({
+                "info": false,
+                "paging": false,
                 "ordering": false
             });
 
             $('#datatable_xl').DataTable();
 
             $('#datatable_xxl').dataTable({
+                "info": false,
+                "paging": false,
                 "ordering": false
             });
 

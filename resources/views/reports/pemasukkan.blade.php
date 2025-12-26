@@ -112,14 +112,8 @@
                             <button type="submit" formaction="exportpdfpemasukan" formtarget="_blank"
                                 class="btn btn-danger"><i class="fa-regular fa-file-pdf"></i><span> Export
                                     PDF</span></button>
-                            {{-- <button type="submit" formaction="exportexcelpemasukan" class="btn btn-success"><i
-                                    class="far fa-file-excel"></i><span> Export Excel</span></button> --}}
                             <button type="submit" formaction="exportexcelpemasukan2" class="btn btn-success"><i
                                     class="far fa-file-excel"></i><span> Export Excel</span></button>
-                            {{-- <button type="submit" formaction="exportexcelpemasukanfull" class="btn btn-success"><i
-                                    class="far fa-file-excel"></i><span> Export Excel(Detail)</span></button> --}}
-                            {{-- <button type="button" class="btn btn-primary"><i class="fas fa-print"></i><span> Print</span></button>
-            --}}
                         </div>
                     </div>
                 </div>
@@ -164,18 +158,6 @@
                 <div class="d-xl-none d-xxl-block">
                     <table class="table table-striped table-hover px-2" id="datatable_xxl">
                         <thead>
-                            {{-- <tr align="center" class="" style="font-weight: bold;">
-              <td rowspan="2" class="align-middle border-2 border-bottom-0 border-end-0">No XL</td>
-              <td rowspan="2" class="align-middle border-2 border-bottom-0 border-end-0">Jenis Dokumen</td>
-              <td colspan="2" class="border-2 border-end-0">Dokumen Pabean</td>
-              <td colspan="2" class="border-2 border-end-0">Bukti Penerimaan Barang</td>
-              <td rowspan="2" class="align-middle border-bottom-0 border-2 border-end-0">Supplier</td>
-              <td rowspan="2" class="align-middle border-bottom-0 border-2 border-end-0">Kode Barang</td>
-              <td rowspan="2" class="align-middle border-bottom-0 border-2 border-end-0">Nama Barang</td>
-              <td rowspan="2" class="align-middle border-bottom-0 border-2 border-end-0">Satuan</td>
-              <td rowspan="2" class="align-middle border-bottom-0 border-2 border-end-0">Jumlah</td>
-              <td colspan="2" colspan="2" class="border-2">Nilai Barang</td>
-            </tr> --}}
                             <tr align="center" class="" style="font-weight: bold;">
                                 <td scope="col" class="border-bottom-0 border-2">No</td>
                                 <td scope="col" class="border-bottom-0 border-2">Jenis Dokumen</td>
@@ -188,15 +170,6 @@
                                 <td scope="col" class="border-bottom-0 border-2">Jumlah</td>
                                 <td align="center" colspan="2" class="border-2">Nilai Barang</td>
                             </tr>
-                            {{-- <tr align="center" class="border-top-0 border-2">
-              <th scope="col" class="align-middle border-top-0 border-bottom-0 border-2 border-end-0">Nomor Pendaftaran
-              </th>
-              <th scope="col" class="align-middle border-top-0 border-bottom-0 border-2 border-end-0">Tanggal</th>
-              <th scope="col" class="border-top-0 border-bottom-0  border-2 border-end-0">Nomor</th>
-              <th scope="col" class="border-top-0 border-bottom-0  border-2 border-end-0">Tanggal</th>
-              <th scope="col" class="border-top-0 border-bottom-0  border-2 border-end-0">Rupiah</th>
-              <th scope="col" class="border-top-0 border-bottom-0  border-2">USD</th>
-            </tr> --}}
                             <tr align="center" class="border-top-0 border-2">
                                 <th scope="col" class="border-top-0 border-bottom-0 border-2"></th>
                                 <th scope="col" class="border-top-0 border-bottom-0  border-2"></th>
@@ -257,8 +230,6 @@
                                                 <td class="border-2">--</td>
                                             @else
                                                 <td class="border-2">{{ number_format($item->jumlah, 2, '.', ',') }}</td>
-                                                {{-- @php $juml = number_format($item->jumlah, 2, '.', ','); @endphp --}}
-                                                {{-- <td class="border-2">{{ strlen($juml) }}</td> --}}
                                             @endif
 
                                             @if ($item->nilai_barang == 0)
@@ -295,18 +266,6 @@
                     <table class="table table-striped table-hover datatable_xl" id="datatable_xl"
                         style="max-width: 950px;">
                         <thead style="font-size: 11px;">
-                            {{-- <tr align="center" class="" style="font-weight: bold;">
-              <td scope="col" rowspan="2" class="align-middle border-2 border-bottom-0 border-end-0">No</td>
-              <td scope="col" rowspan="2" class="align-middle border-2 border-bottom-0 border-end-0">Jenis Dokumen</td>
-              <td colspan="2" class="border-2 border-end-0">Dokumen Pabean</td>
-              <td colspan="2" class="border-2 border-end-0">Bukti Penerimaan Barang</td>
-              <td scope="col" rowspan="2" class="align-middle border-bottom-0 border-2 border-end-0">Supplier</td>
-              <td scope="col" rowspan="2" class="align-middle border-bottom-0 border-2 border-end-0">Kode Barang</td>
-              <td scope="col" rowspan="2" class="align-middle border-bottom-0 border-2 border-end-0">Nama Barang</td>
-              <td scope="col" rowspan="2" class="align-middle border-bottom-0 border-2 border-end-0">Satuan</td>
-              <td scope="col" rowspan="2" class="align-middle border-bottom-0 border-2 border-end-0">Jumlah</td>
-              <td colspan="2" colspan="2" class="border-2">Nilai Barang</td>
-            </tr> --}}
                             <tr align="center" class="" style="font-weight: bold;">
                                 <td scope="col" class="border-bottom-0 border-2" style="width: 1px;">No</td>
                                 <td scope="col" class="border-bottom-0 border-2 border-start-0">Jenis Dokumen</td>
@@ -320,15 +279,6 @@
                                 <td scope="col" class="border-bottom-0 border-2 border-start-0">Jumlah</td>
                                 <td align="center" colspan="2" class="border-2 border-start-0">Nilai Barang</td>
                             </tr>
-                            {{-- <tr align="center" class="border-top-0 border-2">
-              <th scope="col" class="align-middle border-top-0 border-bottom-0  border-2 border-end-0">Nomor Pendaftaran
-              </th>
-              <th scope="col" class="align-middle border-top-0 border-bottom-0  border-2 border-end-0">Tanggal</th>
-              <th scope="col" class="border-top-0 border-bottom-0  border-2 border-end-0">Nomor</th>
-              <th scope="col" class="border-top-0 border-bottom-0  border-2 border-end-0">Tanggal</th>
-              <th scope="col" class="border-top-0 border-bottom-0  border-2 border-end-0">Rupiah</th>
-              <th scope="col" class="border-top-0 border-bottom-0  border-2">USD</th>
-            </tr> --}}
                             <tr align="center">
                                 <th scope="col" class="border-top-0 border-bottom-0 border-2" style="width: 1px;">
                                 </th>
@@ -356,7 +306,6 @@
                                 $no = 0;
                             $dpnomor = ''; @endphp
                             @isset($results)
-                                {{-- @if (count($results) > 0) --}}
                                 @if ($no == 0)
                                     @foreach ($results as $key => $item)
                                         <tr>
@@ -416,17 +365,22 @@
                     </div>
                     {{-- END RESPONSIVE TABLE IN XL --}}
                     <div class="row">
-                        {{-- <div class="col-md-6 py-3">
-          <div class="d-flex justify-content-start">
-            Showing
-            {{ $results->firstItem() }}
-            to
-            {{ $results->lastItem() }}
-            of
-            {{ $results->total() }}
-            Entries
-          </div>
-        </div> --}}
+                        <div class="col-md-6 py-3">
+                            <div class="d-flex justify-content-start">
+                                Showing
+                                {{ $results->firstItem() }}
+                                to
+                                {{ $results->lastItem() }}
+                                of
+                                {{ $results->total() }}
+                                Entries
+                            </div>
+                        </div>
+                        <div class="col-md-12 pt-3">
+                            <div class="d-flex justify-content-end">
+                                {{ $results->appends(request()->input())->links() }}
+                            </div>
+                        </div>
                         <div class="col-md-12 pt-3">
                             <div class="d-flex justify-content-end">
                                 <div class="px-2 pt-1">
@@ -465,14 +419,13 @@
                                             value="0" readonly>
                                     @endif
                                 </div>
-                                {{-- {{ $results->appends(request()->input())->links() }} --}}
                             </div>
                         </div>
                         {{-- <div class="col-md-6">
-          <div class="d-flex justify-content-end">
-            {{ $results->appends(request()->input())->links() }}
-          </div>
-        </div> --}}
+                            <div class="d-flex justify-content-end">
+                                {{ $results->appends(request()->input())->links() }}
+                            </div>
+                        </div> --}}
                     @endisset
                 </div>
             </div>
@@ -481,12 +434,16 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#datatable_xl').dataTable({
+                "info": false,
+                "paging": false,
                 "ordering": false
             });
 
             $('#datatable_xl').DataTable();
 
             $('#datatable_xxl').dataTable({
+                "info": false,
+                "paging": false,
                 "ordering": false
             });
 
