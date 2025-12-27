@@ -3,10 +3,10 @@
 namespace App\Exports;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
@@ -15,70 +15,87 @@ use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
 
-class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize, WithStyles, WithColumnWidths, WithColumnFormatting
+class PengeluaranExport implements FromCollection, WithHeadings, WithStyles, WithColumnWidths, WithColumnFormatting
 {
-    protected $results;
     protected $datefrForm;
     protected $datetoForm;
+    protected $jenisdok;
     protected $comp_name;
+    protected $results;
 
-    public function __construct($results, $datefrForm, $datetoForm, $comp_name)
+    public function __construct($datefrForm, $datetoForm, $jenisdok, $comp_name)
     {
-        $this->results = $results;
         $this->datefrForm = $datefrForm;
         $this->datetoForm = $datetoForm;
-        $this->comp_name = $comp_name;
+        $this->jenisdok   = $jenisdok;
+        $this->comp_name  = $comp_name;
+
+        $this->results = DB::table('pengeluaran_dokumen')
+            ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+            ->where('stat', 1)
+            ->when($jenisdok !== 'All', function ($q) use ($jenisdok) {
+                $q->where('jenis_dokumen', $jenisdok);
+            })
+            ->orderBy('dpnomor')
+            ->orderBy('dptanggal')
+            ->orderBy('bpbnomor')
+            ->get();
     }
 
     public function collection(): Collection
     {
         $data = collect();
 
-        // Add title rows
+        // ===== TITLE =====
         $data->push(['LAPORAN PERTANGGUNG JAWABAN PENGELUARAN DOKUMEN', '', '', '', '', '', '', '', '', '', '', '', '']);
         $data->push([$this->comp_name, '', '', '', '', '', '', '', '', '', '', '', '']);
 
-        if ($this->datefrForm && $this->datetoForm) {
-            $datefr = date('d/m/Y', strtotime($this->datefrForm));
-            $dateto = date('d/m/Y', strtotime($this->datetoForm));
-            $data->push(["PERIODE {$datefr} S.D {$dateto}", '', '', '', '', '', '', '', '', '', '', '', '']);
-        }
+        $datefr = date('d/m/Y', strtotime($this->datefrForm));
+        $dateto = date('d/m/Y', strtotime($this->datetoForm));
+        $data->push(["PERIODE {$datefr} S.D {$dateto}", '', '', '', '', '', '', '', '', '', '', '', '']);
 
-        $data->push([]); // Empty row
+        $data->push([]);
 
-        // Header row 1 (with colspans)
+        // ===== HEADER =====
         $data->push([
-            'No', 'Jenis Dokumen', 'Dokumen Pabean', '', 'Pengeluaran Barang', '', 'Customer',
-            'Kode Barang', 'Nama Barang', 'Satuan', 'Jumlah', 'Nilai Barang', ''
+            'No', 'Jenis Dokumen', 'Dokumen Pabean', '', 'Bukti Pengeluaran Barang', '',
+            'Tujuan', 'Kode Barang', 'Nama Barang', 'Satuan', 'Jumlah', 'Nilai Barang', ''
         ]);
 
-        // Header row 2 (sub-headers)
         $data->push([
             '', '', 'Nomor Pendaftaran', 'Tanggal', 'Nomor', 'Tanggal', '',
             '', '', '', '', 'Rupiah', 'USD'
         ]);
 
-        if ($this->results->count() > 0) {
+        // ===== DATA =====
+        if ($this->results->isEmpty()) {
+            $data->push(['NO DATA RESULTS...', '', '', '', '', '', '', '', '', '', '', '', '']);
+        } else {
+
             $no = 0;
             $dpnomor = '';
             $bpbnomor = '';
 
             foreach ($this->results as $item) {
-                if (trim($item->dpnomor) == trim($dpnomor) && trim($item->bpbnomor) == trim($bpbnomor)) {
-                    // For merged rows, empty first 7 columns
+
+                if ($item->dpnomor == $dpnomor && $item->bpbnomor == $bpbnomor) {
+
                     $data->push([
                         '', '', '', '', '', '', '',
                         $item->kode_barang,
                         $item->nama_barang,
                         $item->sat,
-                        $item->jumlah == 0 ? '--' : (float)$item->jumlah,
-                        $item->nilai_barang == 0 ? '--' : (float)$item->nilai_barang,
-                        $item->nilai_barang_usd == 0 ? '--' : (float)$item->nilai_barang_usd
+                        $item->jumlah ?: '--',
+                        $item->nilai_barang ?: '--',
+                        $item->nilai_barang_usd ?: '--'
                     ]);
-                } elseif (trim($item->dpnomor) == trim($dpnomor) && trim($item->bpbnomor) != trim($bpbnomor)) {
-                    // Special case for different bpbnomor but same dpnomor
+
+                } elseif ($item->dpnomor == $dpnomor && $item->bpbnomor != $bpbnomor) {
+
+                    $bpbnomor = $item->bpbnomor;
+
                     $data->push([
-                        '', '', '', '', $item->bpbnomor, date('d/m/Y', strtotime($item->bpbtanggal)), $item->pembeli_penerima,
+                         '', '', '', '', $item->bpbnomor, date('d/m/Y', strtotime($item->bpbtanggal)), $item->pembeli_penerima,
                         $item->kode_barang,
                         $item->nama_barang,
                         $item->sat,
@@ -86,10 +103,11 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
                         $item->nilai_barang == 0 ? '--' : (float)$item->nilai_barang,
                         $item->nilai_barang_usd == 0 ? '--' : (float)$item->nilai_barang_usd
                     ]);
+
                 } else {
-                    // New document number
+
                     $no++;
-                    $dpnomor = $item->dpnomor;
+                    $dpnomor  = $item->dpnomor;
                     $bpbnomor = $item->bpbnomor;
 
                     $data->push([
@@ -109,11 +127,9 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
                     ]);
                 }
             }
-        } else {
-            $data->push(['NO DATA RESULTS...', '', '', '', '', '', '', '', '', '', '', '', '']);
         }
 
-        $data->push([]); // Empty row
+        $data->push([]);
         $data->push(['~ Swifect Inventory BC ~', '', '', '', '', '', '', '', '', '', '', '', '']);
 
         return $data;
@@ -127,72 +143,55 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
     public function columnWidths(): array
     {
         return [
-            'A' => 5,   // No
-            'B' => 15,  // Jenis Dokumen
-            'C' => 20,  // Nomor Pendaftaran
-            'D' => 12,  // Tanggal Dokumen
-            'E' => 20,  // Nomor Pengeluaran
-            'F' => 12,  // Tanggal Pengeluaran
-            'G' => 25,  // Customer
-            'H' => 15,  // Kode Barang
-            'I' => 50,  // Nama Barang
-            'J' => 8,   // Satuan
-            'K' => 12,  // Jumlah
-            'L' => 18,  // Nilai Rp
-            'M' => 18,  // Nilai USD
+            'A' => 5,
+            'B' => 15,
+            'C' => 20,
+            'D' => 12,
+            'E' => 20,
+            'F' => 12,
+            'G' => 25,
+            'H' => 15,
+            'I' => 50,
+            'J' => 8,
+            'K' => 12,
+            'L' => 18,
+            'M' => 18,
         ];
     }
 
     public function styles(Worksheet $sheet)
     {
-        // Merge cells for title
         $sheet->mergeCells('A1:M1');
         $sheet->mergeCells('A2:M2');
-        if ($this->datefrForm && $this->datetoForm) {
-            $sheet->mergeCells('A3:M3');
-        }
+        $sheet->mergeCells('A3:M3');
 
-        // Style the title
-        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(14);
-        $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A1:A3')->getFont()->setBold(true);
+        $sheet->getStyle('A1:A3')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
-        // Style the company name
-        $sheet->getStyle('A2')->getFont()->setBold(true)->setSize(12);
-        $sheet->getStyle('A2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->mergeCells('C4:D4');
+        $sheet->mergeCells('E4:F4');
+        $sheet->mergeCells('L4:M4');
 
-        // Style the period
-        $sheet->getStyle('A3')->getFont()->setBold(true);
-        $sheet->getStyle('A3')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A4:M5')->getFont()->setBold(true);
+        $sheet->getStyle('A4:M5')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        $sheet->getStyle('A4:M5')->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
+        $sheet->getStyle('A4:M5')->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('4F81BD');
+        $sheet->getStyle('A4:M5')->getFont()->getColor()->setRGB('FFFFFF');
 
-        // Table headers should be on rows 4 and 5
-        $tableHeader1 = 4; // First header row
-        $tableHeader2 = 5; // Second header row
+        $dataStart = 6;
+        $dataEnd   = $sheet->getHighestRow();
 
-        // Merge header cells to match colspan
-        $sheet->mergeCells("C{$tableHeader1}:D{$tableHeader1}"); // Dokumen Pabean
-        $sheet->mergeCells("E{$tableHeader1}:F{$tableHeader1}"); // Pengeluaran Barang
-        $sheet->mergeCells("L{$tableHeader1}:M{$tableHeader1}"); // Nilai Barang
+        $sheet->getStyle("A{$dataStart}:M{$dataEnd}")
+            ->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
 
-        // Style table headers with background color
-        $sheet->getStyle("A{$tableHeader1}:M{$tableHeader2}")->getFont()->setBold(true);
-        $sheet->getStyle("A{$tableHeader1}:M{$tableHeader2}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->getStyle("A{$tableHeader1}:M{$tableHeader2}")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
-        $sheet->getStyle("A{$tableHeader1}:M{$tableHeader2}")->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB('4F81BD'); // Blue background
-        $sheet->getStyle("A{$tableHeader1}:M{$tableHeader2}")->getFont()->getColor()->setRGB('FFFFFF'); // White text
+        $sheet->getStyle("A{$dataStart}:M{$dataEnd}")
+            ->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
-        // Style data rows with borders and center alignment
-        $highestRow = $sheet->getHighestRow();
-        for ($row = $tableHeader2 + 1; $row <= $highestRow; $row++) {
-            $sheet->getStyle("A{$row}:M{$row}")->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_THIN);
-            $sheet->getStyle("A{$row}:M{$row}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-            // Enable text wrapping for Customer column (G) and Nama Barang column (I)
-            $sheet->getStyle("G{$row}")->getAlignment()->setWrapText(true);
-            $sheet->getStyle("I{$row}")->getAlignment()->setWrapText(true);
-        }
+        $sheet->getStyle("G{$dataStart}:G{$dataEnd}")->getAlignment()->setWrapText(true);
+        $sheet->getStyle("I{$dataStart}:I{$dataEnd}")->getAlignment()->setWrapText(true);
 
-        // Style footer
-        $sheet->getStyle("A{$highestRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
-        $sheet->mergeCells("A{$highestRow}:M{$highestRow}");
+        $sheet->mergeCells("A{$dataEnd}:M{$dataEnd}");
+        $sheet->getStyle("A{$dataEnd}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
         return [];
     }
@@ -200,9 +199,9 @@ class PengeluaranExport implements FromCollection, WithHeadings, ShouldAutoSize,
     public function columnFormats(): array
     {
         return [
-            'K' => NumberFormat::FORMAT_NUMBER_00, // Jumlah column - 2 decimal places
-            'L' => NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1, // Nilai Rp column - with commas
-            'M' => NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1, // Nilai USD column - with commas
+            'K' => NumberFormat::FORMAT_NUMBER_00,
+            'L' => NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1,
+            'M' => NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1,
         ];
     }
 }

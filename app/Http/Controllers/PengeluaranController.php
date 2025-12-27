@@ -29,8 +29,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
@@ -42,8 +56,20 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     }
@@ -484,28 +510,50 @@ class PengeluaranController extends Controller
         return view('print.pdf.pengeluaran_report', compact('results', 'datefrForm', 'datetoForm'));
     }
 
+    // public function exportExcel2(Request $request)
+    // {
+    //     if ($request->jenisdok != "All") {
+    //         $dtfr = $request->input('dtfrom');
+    //         $dtto = $request->input('dtto');
+    //         $jenisdok = $request->input('jenisdok');
+    //         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+    //         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+    //         $comp_name = session()->get('comp_name');
+
+    //         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+    //     } else if ($request->jenisdok == "All") {
+    //         $dtfr = $request->input('dtfrom');
+    //         $dtto = $request->input('dtto');
+    //         $jenisdok = $request->input('jenisdok');
+    //         $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+    //         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
+    //         $comp_name = session()->get('comp_name');
+
+    //         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
+    //     }
+
+    //     return Excel::download(new PengeluaranExport($results, $datefrForm, $datetoForm, $comp_name), 'Laporan_PengeluaranDokumen.xlsx');
+    // }
+
     public function exportExcel2(Request $request)
-    {
-        if ($request->jenisdok != "All") {
-            $dtfr = $request->input('dtfrom');
-            $dtto = $request->input('dtto');
-            $jenisdok = $request->input('jenisdok');
-            $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
-            $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
-            $comp_name = session()->get('comp_name');
+{
+    $dtfr = $request->dtfrom;
+    $dtto = $request->dtto;
 
-            $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
-        } else if ($request->jenisdok == "All") {
-            $dtfr = $request->input('dtfrom');
-            $dtto = $request->input('dtto');
-            $jenisdok = $request->input('jenisdok');
-            $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
-            $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
-            $comp_name = session()->get('comp_name');
+    $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
+    $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
 
-            $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
-        }
+    $jenisdok  = $request->jenisdok;
+    $comp_name = session('comp_name');
 
-        return Excel::download(new PengeluaranExport($results, $datefrForm, $datetoForm, $comp_name), 'Laporan_PengeluaranDokumen.xlsx');
-    }
+    return Excel::download(
+        new PengeluaranExport(
+            $datefrForm,
+            $datetoForm,
+            $jenisdok,
+            $comp_name
+        ),
+        'Laporan_PengeluaranDokumen.xlsx'
+    );
+}
 }
