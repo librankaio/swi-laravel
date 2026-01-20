@@ -84,8 +84,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('dpnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('dpnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('dpnomor', '=', $searchtext)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('dpnomor', '=', $searchtext)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
@@ -98,14 +112,28 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('dpnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('dpnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('dpnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('dpnomor', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('dpnomor', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     }
                 }
             }
-            if($request->jenis_pencarian == 'No Bukti Penerimaan'){
+            if($request->jenis_pencarian == 'No Bukti Pengeluaran'){
                 if ($request->searchtext == null) {
                     if ($request->jenisdok != "All") {
                         $dtfr = $request->input('dtfrom');
@@ -116,8 +144,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
@@ -129,8 +171,20 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     }
@@ -145,8 +199,22 @@ class PengeluaranController extends Controller
 
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('bpbnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('bpbnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('bpbnomor', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('bpbnomor', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
@@ -159,8 +227,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('bpbnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('bpbnomor', '=', $searchtext)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('bpbnomor', '=', $searchtext)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('bpbnomor', '=', $searchtext)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     }
@@ -177,8 +259,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
@@ -190,8 +286,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     }
@@ -205,9 +315,23 @@ class PengeluaranController extends Controller
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pemasok_pengirim','desc')->get();
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pemasok_pengirim','desc')->paginate(100);
-    
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('pembeli_penerima', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pembeli_penerima','desc')->paginate(100);
+                        
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('pembeli_penerima', '=', $searchtext)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('pembeli_penerima', '=', $searchtext)
+                        ->sum('nilai_barang_usd');
+
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
@@ -219,9 +343,23 @@ class PengeluaranController extends Controller
                         $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pemasok_pengirim','desc')->get();
-                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pemasok_pengirim','desc')->paginate(100);
+                        $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('pembeli_penerima', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('pembeli_penerima','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('pembeli_penerima', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('pembeli_penerima', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     }
@@ -238,8 +376,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
@@ -251,8 +403,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     }
@@ -267,8 +433,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('kode_barang', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('kode_barang', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
@@ -281,8 +461,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('kode_barang', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('kode_barang', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     }
@@ -299,8 +493,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
@@ -312,8 +520,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','desc')->orderBy('bpbnomor','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('jenis_dokumen', $jenisdok)
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     }
@@ -328,8 +550,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('nama_barang', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('nama_barang', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
@@ -342,8 +578,22 @@ class PengeluaranController extends Controller
     
                         // $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->get();
                         $results = DB::table('pengeluaran_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','desc')->orderBy('kode_barang','desc')->paginate(100);
+
+                        $totalNilaiBarang = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('nama_barang', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang');
+
+                        $totalNilaiBarangUSD = DB::table('pengeluaran_dokumen')
+                        ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
+                        ->where('stat', 1)
+                        ->where('nama_barang', 'like', '%'.$searchtext.'%')
+                        ->sum('nilai_barang_usd');
     
                         return view('reports.pengeluaran', [
+                            'totalNilaiBarang' => $totalNilaiBarang,
+                            'totalNilaiBarangUSD' => $totalNilaiBarangUSD,
                             'results' => $results
                         ]);
                     }

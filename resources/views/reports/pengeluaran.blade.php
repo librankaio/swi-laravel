@@ -135,15 +135,15 @@
                                         <?php
                                         if(request()->input('jenis_pencarian') == NULL){ ?>
                                         <option value='No Pendaftaran'>No Pendaftaran</option>
-                                        <option value="No Bukti Penerimaan">No Bukti Penerimaan</option>
+                                        <option value="No Bukti Pengeluaran">No Bukti Pengeluaran</option>
                                         <option value="Supplier">Supplier</option>
                                         <option value="Kode Barang">Kode Barang</option>
                                         <option value="Nama Barang">Nama Barang</option>
                                         <?php }else{ ?>
                                         <option selected value='{{ $_GET['jenis_pencarian'] }}'>
                                             {{ $_GET['jenis_pencarian'] }}</option>
-                                        <option value='No Pendaftaran'>No Bukti Bayar</option>
-                                        <option value="No Bukti Penerimaan">No Bukti Penerimaan</option>
+                                        <option value='No Pendaftaran'>No Pendaftaran</option>
+                                        <option value="No Bukti Pengeluaran">No Bukti Pengeluaran</option>
                                         <option value="Supplier">Supplier</option>
                                         <option value="Kode Barang">Kode Barang</option>
                                         <option value="Nama Barang">Nama Barang</option>
@@ -154,7 +154,8 @@
                                     <label for="searchtext" class="form-label fw-bold">Search:</label>
                                     <input type="text" class="form-control" id="searchtext"
                                         aria-describedby="searchtext" name="searchtext"
-                                        placeholder="Enter search term...">
+                                        placeholder="Enter search term..."
+                                        value="@php if(request('searchtext')!=NULL){ echo $_GET['searchtext']; } @endphp">
                                 </div>
                             </div>
                         </div>

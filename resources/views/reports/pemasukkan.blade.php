@@ -148,7 +148,8 @@
                                     <label for="searchtext" class="form-label fw-bold">Search:</label>
                                     <input type="text" class="form-control" id="searchtext"
                                         aria-describedby="searchtext" name="searchtext"
-                                        placeholder="Enter search term...">
+                                        placeholder="Enter search term..."
+                                        value="@php if(request('searchtext')!=NULL){ echo $_GET['searchtext']; } @endphp">
                                 </div>
                             </div>
                         </div>
