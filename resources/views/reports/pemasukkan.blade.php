@@ -136,7 +136,7 @@
                                         <?php }else{ ?>
                                         <option selected value='{{ $_GET['jenis_pencarian'] }}'>
                                             {{ $_GET['jenis_pencarian'] }}</option>
-                                        <option value='No Pendaftaran'>No Bukti Bayar</option>
+                                        <option value='No Pendaftaran'>No Pendaftaran</option>
                                         <option value="No Bukti Penerimaan">No Bukti Penerimaan</option>
                                         <option value="Supplier">Supplier</option>
                                         <option value="Kode Barang">Kode Barang</option>
