@@ -27,7 +27,7 @@ class PemasukkanController extends Controller
             if($request->jenis_pencarian == 'No Pendaftaran'){
                 if ($request->searchtext == null) {
                     if ($request->jenisdok != "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -47,7 +47,7 @@ class PemasukkanController extends Controller
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -68,7 +68,7 @@ class PemasukkanController extends Controller
                 } else if ($request->searchtext != null) {
                     $searchtext = $request->searchtext;
                     if ($request->jenisdok != "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('dpnomor', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('dpnomor', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -90,7 +90,7 @@ class PemasukkanController extends Controller
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('dpnomor', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('dpnomor', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -115,7 +115,7 @@ class PemasukkanController extends Controller
             if($request->jenis_pencarian == 'No Bukti Penerimaan'){
                 if($request->searchtext == null){
                     if ($request->jenisdok != "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -135,7 +135,7 @@ class PemasukkanController extends Controller
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -156,7 +156,7 @@ class PemasukkanController extends Controller
                 }else if ($request->searchtext != null) {
                     $searchtext = $request->searchtext;
                     if ($request->jenisdok != "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('bpbnomor', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('bpbnomor', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -178,7 +178,7 @@ class PemasukkanController extends Controller
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('bpbnomor', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('bpbnomor', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -203,7 +203,7 @@ class PemasukkanController extends Controller
             if($request->jenis_pencarian == 'Supplier'){
                 if($request->searchtext == null){
                     if ($request->jenisdok != "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -223,7 +223,7 @@ class PemasukkanController extends Controller
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -244,7 +244,7 @@ class PemasukkanController extends Controller
                 }else if ($request->searchtext != null) {
                     $searchtext = $request->searchtext;
                     if ($request->jenisdok != "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -266,7 +266,7 @@ class PemasukkanController extends Controller
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('pemasok_pengirim', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -291,7 +291,7 @@ class PemasukkanController extends Controller
             if($request->jenis_pencarian == 'Kode Barang'){
                 if($request->searchtext == null){
                     if ($request->jenisdok != "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -311,7 +311,7 @@ class PemasukkanController extends Controller
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -332,7 +332,7 @@ class PemasukkanController extends Controller
                 }else if ($request->searchtext != null) {
                     $searchtext = $request->searchtext;
                     if ($request->jenisdok != "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -354,7 +354,7 @@ class PemasukkanController extends Controller
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('kode_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -379,7 +379,7 @@ class PemasukkanController extends Controller
             if($request->jenis_pencarian == 'Nama Barang'){
                 if($request->searchtext == null){
                     if ($request->jenisdok != "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -399,7 +399,7 @@ class PemasukkanController extends Controller
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -420,7 +420,7 @@ class PemasukkanController extends Controller
                 }else if ($request->searchtext != null) {
                     $searchtext = $request->searchtext;
                     if ($request->jenisdok != "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -442,7 +442,7 @@ class PemasukkanController extends Controller
                             'results' => $results
                         ]);
                     } else if ($request->jenisdok == "All") {
-                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->paginate(100);
+                        $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('stat', '=', 1)->where('nama_barang', 'like', '%'.$searchtext.'%')->orderBy('dptanggal','asc')->orderBy('dpnomor','asc')->orderBy('bpbnomor','asc')->get();
 
                         $totalNilaiBarang = DB::table('pemasukan_dokumen')
                         ->whereBetween('dptanggal', [$datefrForm, $datetoForm])
@@ -496,7 +496,7 @@ class PemasukkanController extends Controller
                 $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                 $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
 
-                $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('tstatus', '=', 1)->paginate(10);
+                $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('tstatus', '=', 1)->get();
 
                 return view('reports.pemasukkan', [
                     'results' => $results
@@ -511,7 +511,7 @@ class PemasukkanController extends Controller
                 $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                 $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
 
-                $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('tstatus', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('dpnomor', '=', $searchtext)->paginate(10);
+                $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('tstatus', '=', 1)->where('jenis_dokumen', '=', $jenisdok)->where('dpnomor', '=', $searchtext)->get();
 
                 return view('reports.pemasukkan', [
                     'results' => $results
@@ -524,7 +524,7 @@ class PemasukkanController extends Controller
                 $datefrForm = Carbon::createFromFormat('d/m/Y', $dtfr)->format('Y-m-d');
                 $datetoForm = Carbon::createFromFormat('d/m/Y', $dtto)->format('Y-m-d');
 
-                $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('tstatus', '=', 1)->where('dpnomor', '=', $searchtext)->paginate(10);
+                $results = DB::table('pemasukan_dokumen')->whereBetween('dptanggal', [$datefrForm, $datetoForm])->where('tstatus', '=', 1)->where('dpnomor', '=', $searchtext)->get();
 
                 return view('reports.pemasukkan', [
                     'results' => $results

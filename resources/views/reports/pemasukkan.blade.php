@@ -366,7 +366,7 @@
                     </div>
                     {{-- END RESPONSIVE TABLE IN XL --}}
                     <div class="row">
-                        <div class="col-md-6 py-3">
+                        {{-- <div class="col-md-6 py-3">
                             <div class="d-flex justify-content-start">
                                 Showing
                                 {{ $results->firstItem() }}
@@ -376,12 +376,12 @@
                                 {{ $results->total() }}
                                 Entries
                             </div>
-                        </div>
-                        <div class="col-md-12 pt-3">
+                        </div> --}}
+                        {{-- <div class="col-md-12 pt-3">
                             <div class="d-flex justify-content-end">
                                 {{ $results->appends(request()->input())->links() }}
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-md-12 pt-3">
                             <div class="d-flex justify-content-end">
                                 <div class="px-2 pt-1">
@@ -439,16 +439,16 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#datatable_xl').dataTable({
-                "info": false,
-                "paging": false,
+                "info": true,
+                "paging": true,
                 "ordering": false
             });
 
             $('#datatable_xl').DataTable();
 
             $('#datatable_xxl').dataTable({
-                "info": false,
-                "paging": false,
+                "info": true,
+                "paging": true,
                 "ordering": false
             });
 
